@@ -248,6 +248,29 @@ def score_tender(tender: dict[str, Any], cfg: dict[str, Any]) -> tuple[int, list
     return score, sorted(set(matched))
 
 
+def passes_relevance_profile(
+    tender: dict[str, Any],
+    cfg: dict[str, Any],
+    score: int,
+    matched_terms: list[str],
+) -> tuple[bool, str]:
+    text = f"{tender.get('title') or ''} {tender.get('description') or ''}"
+    minimum_score = int(cfg.get("minimum_score", 1))
+    if score < minimum_score:
+        return False, f"Excluded: weak keyword score ({score})"
+
+    anchors = cfg.get("anchor_keywords", [])
+    matched_anchor = [term.strip() for term in anchors if contains_term(text, term)]
+    if not matched_anchor:
+        return False, "Excluded: no Geo-K anchor term"
+
+    generic_only = {"satellite", "validation", "quality", "thermal", "processing"}
+    if set(matched_terms).issubset(generic_only):
+        return False, "Excluded: generic space/manufacturing terminology only"
+
+    return True, ", ".join(sorted(set(matched_anchor))[:8])
+
+
 def get_all_tenders(max_items: int) -> list[dict[str, Any]]:
     tenders: list[dict[str, Any]] = []
     page_size = 50
@@ -410,8 +433,11 @@ def main() -> int:
         include_scope, scope = eligibility_scope(tender)
         if not include_scope:
             continue
+        include_relevance, relevance = passes_relevance_profile(tender, cfg, score, terms)
+        if not include_relevance:
+            continue
         urgency, days = urgency_for(tender, now)
-        matches.append(Match(tender, score, terms, scope, urgency, days))
+        matches.append(Match(tender, score, terms, f"{scope}; {relevance}", urgency, days))
 
     urgency_rank = {
         "RED": 0,
