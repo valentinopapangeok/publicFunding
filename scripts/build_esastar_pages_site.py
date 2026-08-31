@@ -63,6 +63,7 @@ def render_table(rows: list[dict[str, str]]) -> str:
             f"<td><a href='{html.escape(row['ESA-star'])}'>{html.escape(row['Title'])}</a></td>"
             f"<td>{html.escape(row['Status'])}</td>"
             f"<td>{html.escape(row['Type'])}</td>"
+            f"<td>{html.escape(row.get('Scope', ''))}</td>"
             f"<td>{html.escape(row['Opened'])}</td>"
             f"<td>{html.escape(row['Deadline'])}</td>"
             f"<td>{html.escape(row['Clarification'])}</td>"
@@ -187,7 +188,7 @@ def main() -> int:
 <body>
   <header>
     <h1>Geo-K ESA-star Funding Monitor</h1>
-    <p>Active-only ESA-star opportunities filtered for Geo-K themes. Generated {html.escape(generated)}.</p>
+    <p>Active-only ESA-star opportunities filtered for Geo-K themes and broad European or Italian eligibility. Generated {html.escape(generated)}.</p>
     <div class="legend">
       <span class="badge" style="background:{COLORS['RED']}">RED <=7 days</span>
       <span class="badge" style="background:{COLORS['ORANGE']}">ORANGE <=14 days</span>
@@ -212,6 +213,7 @@ def main() -> int:
             <th>Title</th>
             <th>Status</th>
             <th>Type</th>
+            <th>Scope</th>
             <th>Opened</th>
             <th>Deadline</th>
             <th>Clarification</th>

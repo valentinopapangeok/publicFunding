@@ -45,6 +45,7 @@ class Match:
     tender: dict[str, Any]
     score: int
     matched_terms: list[str]
+    scope: str
     urgency: str
     days_to_deadline: int | None
 
@@ -87,11 +88,123 @@ def contains_term(text: str, term: str) -> bool:
     stripped = term_l.strip()
     if not stripped:
         return False
-    if stripped != term_l:
-        return re.search(rf"(?<![a-z0-9]){re.escape(stripped)}(?![a-z0-9])", text_l) is not None
-    if len(stripped) <= 4:
-        return re.search(rf"(?<![a-z0-9]){re.escape(stripped)}(?![a-z0-9])", text_l) is not None
-    return stripped in text_l
+    pattern = re.escape(stripped).replace(r"\ ", r"\s+")
+    return re.search(rf"(?<![a-z0-9]){pattern}(?![a-z0-9])", text_l) is not None
+
+
+EUROPEAN_SCOPE_TERMS = [
+    "european space agency",
+    "esa member states",
+    "esa member state",
+    "all esa",
+    "all member states",
+    "associate members",
+    "european cooperating states",
+    "european industry",
+    "european space sector",
+    "european",
+    "worldwide",
+    "international",
+]
+
+ITALY_SCOPE_TERMS = [
+    "italy",
+    "italian",
+    "esrin",
+    "frascati",
+]
+
+COUNTRY_LIMIT_TERMS = [
+    "bulgaria",
+    "bulgarian",
+    "spain",
+    "spanish",
+    "portugal",
+    "portuguese",
+    "greece",
+    "greek",
+    "romania",
+    "romanian",
+    "poland",
+    "polish",
+    "hungary",
+    "hungarian",
+    "czech",
+    "slovakia",
+    "slovak",
+    "slovenia",
+    "slovenian",
+    "croatia",
+    "croatian",
+    "latvia",
+    "lithuania",
+    "estonia",
+    "austria",
+    "austrian",
+    "belgium",
+    "belgian",
+    "denmark",
+    "danish",
+    "finland",
+    "finnish",
+    "france",
+    "french",
+    "germany",
+    "german",
+    "ireland",
+    "irish",
+    "luxembourg",
+    "netherlands",
+    "dutch",
+    "norway",
+    "norwegian",
+    "sweden",
+    "swedish",
+    "switzerland",
+    "swiss",
+    "united kingdom",
+    "uk",
+]
+
+
+def text_blob(tender: dict[str, Any]) -> str:
+    return f"{tender.get('title') or ''} {tender.get('description') or ''}".lower()
+
+
+def eligibility_scope(tender: dict[str, Any]) -> tuple[bool, str]:
+    text = text_blob(tender)
+    countries = tender.get("countries") or []
+    country_count = len(countries)
+    has_italy = any(contains_term(text, term) for term in ITALY_SCOPE_TERMS)
+    if has_italy:
+        return True, "Italy-relevant"
+
+    country_limited_patterns = [
+        r"addressed\s+only\s+to\s+[^.]{0,120}legal\s+entities",
+        r"only\s+open\s+to\s+[^.]{0,120}legal\s+entities",
+        r"restricted\s+to\s+[^.]{0,120}legal\s+entities",
+        r"limited\s+to\s+[^.]{0,120}legal\s+entities",
+        r"\bspace\s+weather\s+centre\s+for\s+[a-z ]+",
+        r"\bunder\s+the\s+plan\s+for\s+european\s+cooperating\s+states\s+\(pecs\)\s+in\s+[a-z ]+",
+    ]
+    if any(re.search(pattern, text) for pattern in country_limited_patterns):
+        return False, "Excluded: national/legal-entity restricted"
+
+    for country in COUNTRY_LIMIT_TERMS:
+        country_pattern = re.escape(country).replace(r"\ ", r"\s+")
+        if re.search(rf"\b(for|in|of)\s+(the\s+)?{country_pattern}\b", text):
+            return False, f"Excluded: country-specific ({country})"
+
+    if country_count >= 10:
+        return True, "Wide ESA/European scope"
+
+    if any(contains_term(text, term) for term in EUROPEAN_SCOPE_TERMS):
+        return True, "European/open scope"
+
+    if country_count == 0:
+        return True, "Open scope not country-coded"
+
+    return False, f"Excluded: limited country list ({country_count})"
 
 
 def urgency_for(tender: dict[str, Any], now: datetime) -> tuple[str, int | None]:
@@ -122,7 +235,7 @@ def is_active_tender(tender: dict[str, Any], now: datetime) -> bool:
 
 
 def score_tender(tender: dict[str, Any], cfg: dict[str, Any]) -> tuple[int, list[str]]:
-    text = f"{tender.get('title', '')} {tender.get('description', '')}"
+    text = f"{tender.get('title') or ''} {tender.get('description') or ''}"
     for term in cfg["exclude_keywords"]:
         if contains_term(text, term):
             return 0, []
@@ -221,6 +334,7 @@ def write_report(matches: list[Match], now: datetime, changes: list[str], out_di
                 "Deadline": t.get("closingDate") or "",
                 "Clarification": t.get("clarificationRequestDeadline") or "",
                 "Score": str(m.score),
+                "Scope": m.scope,
                 "Matched Terms": ", ".join(m.matched_terms[:12]),
                 "Theme": clean(t.get("description"))[:700],
                 "ESA-star": f"{BASE}/ESATenderActions/details/{t.get('id')}",
@@ -237,7 +351,7 @@ def write_report(matches: list[Match], now: datetime, changes: list[str], out_di
         "",
         f"Generated: {now.strftime('%Y-%m-%d %H:%M')}",
         "",
-        "Active-only report. Closed, passed-deadline, evaluation, awarded, completed, archived and cancelled records are excluded.",
+        "Active-only report. Closed, passed-deadline, evaluation, awarded, completed, archived and cancelled records are excluded. Country-limited calls are excluded unless they are Italy-relevant or broad European/open scope.",
         "",
         "Urgency: RED <=7 days; ORANGE <=14 days; AMBER <=30 days; GREEN >30 days; BLUE no deadline/intended.",
         "",
@@ -254,13 +368,13 @@ def write_report(matches: list[Match], now: datetime, changes: list[str], out_di
         "",
         "## Matched Opportunities",
         "",
-        "| Urgency | Days | TA | ID | Title | Status | Opened | Deadline | Match |",
-        "| --- | ---: | --- | ---: | --- | --- | --- | --- | --- |",
+        "| Urgency | Days | TA | ID | Title | Status | Scope | Opened | Deadline | Match |",
+        "| --- | ---: | --- | ---: | --- | --- | --- | --- | --- | --- |",
     ])
     for row in rows:
         lines.append(
             f"| {row['Urgency']} | {row['Days']} | {row['TA']} | {row['ID']} | "
-            f"{row['Title']} | {row['Status']} | {row['Opened']} | {row['Deadline']} | {row['Matched Terms']} |"
+            f"{row['Title']} | {row['Status']} | {row['Scope']} | {row['Opened']} | {row['Deadline']} | {row['Matched Terms']} |"
         )
     lines.extend(
         [
@@ -293,8 +407,11 @@ def main() -> int:
         score, terms = score_tender(tender, cfg)
         if score <= 0:
             continue
+        include_scope, scope = eligibility_scope(tender)
+        if not include_scope:
+            continue
         urgency, days = urgency_for(tender, now)
-        matches.append(Match(tender, score, terms, urgency, days))
+        matches.append(Match(tender, score, terms, scope, urgency, days))
 
     urgency_rank = {
         "RED": 0,
@@ -314,7 +431,19 @@ def main() -> int:
     )
     changes = detect_changes(matches, previous)
     (run_dir / "matched-tenders.json").write_text(
-        json.dumps([{"score": m.score, "matched_terms": m.matched_terms, "urgency": m.urgency, "tender": m.tender} for m in matches], indent=2),
+        json.dumps(
+            [
+                {
+                    "score": m.score,
+                    "matched_terms": m.matched_terms,
+                    "scope": m.scope,
+                    "urgency": m.urgency,
+                    "tender": m.tender,
+                }
+                for m in matches
+            ],
+            indent=2,
+        ),
         encoding="utf-8",
     )
     write_report(matches, now, changes, run_dir)
