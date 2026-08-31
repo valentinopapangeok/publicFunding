@@ -45,16 +45,16 @@ jobs:
 
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
             git fetch origin gh-pages:gh-pages
-            git checkout gh-pages
+            git checkout -f gh-pages
           else
             git checkout --orphan gh-pages
           fi
 
-          git rm -rf . >/dev/null 2>&1 || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -R "$output_dir"/. .
           touch .nojekyll
 
-          git add .
+          git add -A
           if git diff --cached --quiet; then
             echo "No site changes to publish."
           else
