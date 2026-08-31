@@ -27,24 +27,6 @@ def load_rows() -> list[dict[str, str]]:
         return list(csv.DictReader(fh))
 
 
-def load_changes() -> list[str]:
-    path = LATEST / "geok-opportunity-monitor.md"
-    if not path.exists():
-        return []
-    lines = path.read_text(encoding="utf-8").splitlines()
-    in_section = False
-    changes: list[str] = []
-    for line in lines:
-        if line == "## New Or Changed Since Previous Run":
-            in_section = True
-            continue
-        if in_section and line.startswith("## "):
-            break
-        if in_section and line.startswith("- "):
-            changes.append(line[2:])
-    return changes
-
-
 def urgency_key(value: str) -> str:
     return value.split(" ", 1)[0]
 
@@ -75,12 +57,10 @@ def render_table(rows: list[dict[str, str]]) -> str:
 
 def main() -> int:
     rows = load_rows()
-    changes = load_changes()
     SITE.mkdir(parents=True, exist_ok=True)
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
     (SITE / "data.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
     generated = datetime.now().strftime("%Y-%m-%d %H:%M")
-    changes_html = "\n".join(f"<li>{html.escape(item)}</li>" for item in changes) or "<li>No changes detected.</li>"
     page = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -198,10 +178,6 @@ def main() -> int:
     </div>
   </header>
   <main>
-    <section class="panel">
-      <h2>New Or Changed</h2>
-      <ul>{changes_html}</ul>
-    </section>
     <section class="table-wrap">
       <table>
         <thead>

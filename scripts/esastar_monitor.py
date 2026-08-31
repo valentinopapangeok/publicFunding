@@ -339,7 +339,7 @@ def detect_changes(matches: list[Match], previous: dict[str, dict[str, Any]]) ->
     return changes
 
 
-def write_report(matches: list[Match], now: datetime, changes: list[str], out_dir: Path) -> None:
+def write_report(matches: list[Match], now: datetime, out_dir: Path) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     rows = []
     for m in matches:
@@ -378,22 +378,11 @@ def write_report(matches: list[Match], now: datetime, changes: list[str], out_di
         "",
         "Urgency: RED <=7 days; ORANGE <=14 days; AMBER <=30 days; GREEN >30 days; BLUE no deadline/intended.",
         "",
-        "## New Or Changed Since Previous Run",
-        "",
-    ]
-    if changes:
-        lines.extend(f"- {change}" for change in changes[:30])
-        if len(changes) > 30:
-            lines.append(f"- ...and {len(changes) - 30} more changes.")
-    else:
-        lines.append("- No matched tender changed materially since the previous run.")
-    lines.extend([
-        "",
         "## Matched Opportunities",
         "",
         "| Urgency | Days | TA | ID | Title | Status | Scope | Opened | Deadline | Match |",
         "| --- | ---: | --- | ---: | --- | --- | --- | --- | --- | --- |",
-    ])
+    ]
     for row in rows:
         lines.append(
             f"| {row['Urgency']} | {row['Days']} | {row['TA']} | {row['ID']} | "
@@ -418,7 +407,6 @@ def main() -> int:
     max_items = int(sys.argv[1]) if len(sys.argv) > 1 else 300
     now = datetime.now()
     run_dir = RUNS_DIR / now.strftime("%Y%m%d-%H%M%S")
-    previous = read_previous_matches()
     tenders = get_all_tenders(max_items)
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "all-tenders.json").write_text(json.dumps(tenders, indent=2), encoding="utf-8")
@@ -455,7 +443,6 @@ def main() -> int:
             clean(m.tender.get("title")),
         )
     )
-    changes = detect_changes(matches, previous)
     (run_dir / "matched-tenders.json").write_text(
         json.dumps(
             [
@@ -472,7 +459,7 @@ def main() -> int:
         ),
         encoding="utf-8",
     )
-    write_report(matches, now, changes, run_dir)
+    write_report(matches, now, run_dir)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name in ["all-tenders.json", "matched-tenders.json", "geok-opportunity-monitor.md", "geok-opportunity-monitor.csv"]:
         shutil.copy2(run_dir / name, OUT_DIR / name)
