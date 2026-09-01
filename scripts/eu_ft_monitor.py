@@ -47,6 +47,7 @@ SEARCH_TERMS = [
     "looting archaeological sites",
     "HORIZON-CL2-2026-01-HERITAGE-07",
     "HORIZON-MISS-2026-01-CLIMA-05",
+    "LIFE-2026-STRAT-NAT-SNAP-two-stage",
     "critical infrastructure",
     "civil security disaster",
 ]
@@ -54,6 +55,13 @@ SEARCH_TERMS = [
 PINNED_TOPIC_IDS = {
     "HORIZON-CL2-2026-01-HERITAGE-07": "Archaeology/cultural heritage security: geospatial intelligence and looting/trafficking prevention.",
     "HORIZON-MISS-2026-01-CLIMA-05": "Cultural heritage climate adaptation: EO/geospatial monitoring can support risk mapping and preservation planning.",
+    "LIFE-2026-STRAT-NAT-SNAP-two-stage": "LIFE Strategic Nature Projects (SNaP): large nature/biodiversity implementation projects; monitor for public-authority or specialist geospatial support role.",
+}
+
+PINNED_TOPIC_TERMS = {
+    "HORIZON-CL2-2026-01-HERITAGE-07": ["archaeology/cultural heritage targeted scout"],
+    "HORIZON-MISS-2026-01-CLIMA-05": ["cultural heritage climate adaptation targeted scout"],
+    "LIFE-2026-STRAT-NAT-SNAP-two-stage": ["LIFE", "nature", "biodiversity", "strategic project"],
 }
 
 STATUS = {
@@ -311,6 +319,9 @@ def urgency_for(deadline: datetime | None, now: datetime) -> tuple[str, int | No
 
 def consortium_burden(item: dict[str, Any]) -> str:
     meta = item.get("metadata") or {}
+    identifier = first(meta, "identifier")
+    if identifier == "LIFE-2026-STRAT-NAT-SNAP-two-stage":
+        return "HIGH - LIFE Strategic Nature Project; public authority / large partnership route likely"
     text = text_blob(item).lower()
     action = first(meta, "typesOfAction")
     if any(term in text for term in ["consortium", "consortia", "at least three legal entities"]):
@@ -417,7 +428,7 @@ def main() -> int:
         score, terms = score_item(item, cfg)
         if is_pinned_topic(item) and not terms:
             score = max(score, 10)
-            terms = ["archaeology/cultural heritage targeted scout"]
+            terms = PINNED_TOPIC_TERMS.get(first(item.get("metadata") or {}, "identifier"), ["targeted scout"])
         if not terms or not passes_relevance(item, cfg, score, terms):
             continue
         urgency, days = urgency_for(deadline, now)
