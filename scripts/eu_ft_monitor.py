@@ -40,9 +40,21 @@ SEARCH_TERMS = [
     "agriculture monitoring",
     "archaeology",
     "cultural heritage",
+    "earth observation cultural heritage",
+    "remote sensing cultural heritage",
+    "heritage climate change",
+    "illicit trafficking cultural goods",
+    "looting archaeological sites",
+    "HORIZON-CL2-2026-01-HERITAGE-07",
+    "HORIZON-MISS-2026-01-CLIMA-05",
     "critical infrastructure",
     "civil security disaster",
 ]
+
+PINNED_TOPIC_IDS = {
+    "HORIZON-CL2-2026-01-HERITAGE-07": "Archaeology/cultural heritage security: geospatial intelligence and looting/trafficking prevention.",
+    "HORIZON-MISS-2026-01-CLIMA-05": "Cultural heritage climate adaptation: EO/geospatial monitoring can support risk mapping and preservation planning.",
+}
 
 STATUS = {
     "31094502": "Open",
@@ -194,6 +206,9 @@ def score_item(item: dict[str, Any], cfg: dict[str, Any]) -> tuple[int, list[str
 
 
 def passes_relevance(item: dict[str, Any], cfg: dict[str, Any], score: int, terms: list[str]) -> bool:
+    meta = item.get("metadata") or {}
+    if is_pinned_topic(item):
+        return True
     if score < int(cfg.get("minimum_score", 2)):
         return False
     text = text_blob(item)
@@ -307,6 +322,11 @@ def consortium_burden(item: dict[str, Any]) -> str:
     return "MEDIUM - check topic rules"
 
 
+def is_pinned_topic(item: dict[str, Any]) -> bool:
+    meta = item.get("metadata") or {}
+    return first(meta, "identifier") in PINNED_TOPIC_IDS
+
+
 def normalized_url(item: dict[str, Any]) -> str:
     meta = item.get("metadata") or {}
     identifier = first(meta, "identifier")
@@ -342,7 +362,7 @@ def write_outputs(matches: list[Match], now: datetime, out_dir: Path) -> None:
                 "Days": "" if match.days_to_deadline is None else str(match.days_to_deadline),
                 "Score": str(match.score),
                 "Matched Terms": ", ".join(match.matched_terms[:12]),
-                "Theme": text_blob(item)[:700],
+                "Theme": PINNED_TOPIC_IDS.get(identifier, text_blob(item)[:700]),
                 "URL": normalized_url(item),
             }
         )
@@ -395,6 +415,9 @@ def main() -> int:
         if deadline and deadline.date() < now.date():
             continue
         score, terms = score_item(item, cfg)
+        if is_pinned_topic(item) and not terms:
+            score = max(score, 10)
+            terms = ["archaeology/cultural heritage targeted scout"]
         if not terms or not passes_relevance(item, cfg, score, terms):
             continue
         urgency, days = urgency_for(deadline, now)
