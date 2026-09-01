@@ -1,4 +1,4 @@
-name: ESA-star Funding Monitor Pages
+name: Geo-K Funding Monitor Pages
 
 on:
   workflow_dispatch:
@@ -8,9 +8,8 @@ on:
     branches:
       - main
     paths:
-      - "scripts/esastar_monitor.py"
-      - "scripts/build_esastar_pages_site.py"
-      - "monitoring/esa-star/**"
+      - "scripts/**"
+      - "monitoring/**"
       - ".github/workflows/esastar-monitor-pages.yml"
 
 permissions:
@@ -29,6 +28,18 @@ jobs:
 
       - name: Run ESA-star monitor
         run: python3 scripts/esastar_monitor.py 300
+
+      - name: Run EU Funding & Tenders monitor
+        run: python3 scripts/eu_ft_monitor.py 25
+
+      - name: Run ECMWF Copernicus monitor
+        run: python3 scripts/ecmwf_monitor.py
+
+      - name: Run LIFE CINEA monitor
+        run: python3 scripts/life_cinea_monitor.py
+
+      - name: Run FAO UNGM monitor
+        run: python3 scripts/fao_ungm_monitor.py
 
       - name: Build static site
         run: python3 scripts/build_esastar_pages_site.py
@@ -58,6 +69,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No site changes to publish."
           else
-            git commit -m "Publish ESA-star monitor site"
+            git commit -m "Publish Geo-K funding monitor site"
             git push origin gh-pages
           fi

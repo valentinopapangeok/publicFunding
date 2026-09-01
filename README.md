@@ -1,8 +1,8 @@
-# Geo-K ESA-star Funding Monitor
+# Geo-K Funding Monitor
 
-Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor currently covers ESA-star; the broader monitoring roadmap covers EU Funding & Tenders, LIFE/CINEA, ECMWF Copernicus procurement, and FAO/UNGM.
+Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor covers ESA-star, EU Funding & Tenders, ECMWF Copernicus procurement, LIFE/CINEA, and FAO/UNGM.
 
-The monitor queries ESA-star public API data directly, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report.
+The monitor queries public source data, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report.
 
 Geo-K themes are separated from source portals:
 
@@ -10,6 +10,7 @@ Geo-K themes are separated from source portals:
 - Geo-K profile: `monitoring/geok-profile.md`
 - Implementation roadmap: `monitoring/roadmap.md`
 - ESA-star keyword profile: `monitoring/esa-star/geok-keywords.json`
+- Source scripts: `scripts/esastar_monitor.py`, `scripts/eu_ft_monitor.py`, `scripts/ecmwf_monitor.py`, `scripts/life_cinea_monitor.py`, `scripts/fao_ungm_monitor.py`
 
 Current Geo-K themes include Earth Observation, satellite image processing, wildfire, water/hydrology, agriculture, drones/UAVs, autonomous systems, edge/on-board AI, SAR/SWIR/thermal, validation/veracity/provenance, archaeology/cultural heritage, and critical infrastructure monitoring.
 
@@ -25,6 +26,10 @@ site/esa-star-monitor/
 
 ```sh
 python3 scripts/esastar_monitor.py 300
+python3 scripts/eu_ft_monitor.py 25
+python3 scripts/ecmwf_monitor.py
+python3 scripts/life_cinea_monitor.py
+python3 scripts/fao_ungm_monitor.py
 python3 scripts/build_esastar_pages_site.py
 ```
 
@@ -32,6 +37,10 @@ Generated local outputs:
 
 ```text
 funding-scout/monitoring/esa-star/latest/
+funding-scout/monitoring/eu-funding-tenders/latest/
+funding-scout/monitoring/ecmwf-copernicus/latest/
+funding-scout/monitoring/life-cinea/latest/
+funding-scout/monitoring/fao-ungm/latest/
 site/esa-star-monitor/index.html
 site/esa-star-monitor/data.json
 ```

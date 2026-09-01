@@ -9,6 +9,10 @@
 
 !scripts/
 !scripts/esastar_monitor.py
+!scripts/eu_ft_monitor.py
+!scripts/ecmwf_monitor.py
+!scripts/life_cinea_monitor.py
+!scripts/fao_ungm_monitor.py
 !scripts/build_esastar_pages_site.py
 
 !monitoring/
