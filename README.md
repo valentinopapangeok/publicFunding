@@ -4,6 +4,8 @@ Public, sanitized monitor for active funding opportunities relevant to Geo-K. Th
 
 The monitor queries public source data, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report.
 
+The published table includes a `Call Lens` column: a plain-language hint describing whether the row is a supplier tender, EU/Horizon-style consortium grant, LIFE project, UN procurement notice, ESA tender pipeline item, or business/application call where customer, user, or business-case evidence is likely needed.
+
 Geo-K themes are separated from source portals:
 
 - Source registry: `monitoring/funding-sources.json`

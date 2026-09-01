@@ -18,7 +18,8 @@
     "Score": "8",
     "Matched Terms": "ai, earth observation, eo, forest, validation",
     "Theme": "Europe has built world leading Earth Observation (EO) infrastructures, but today's exploitation paradigm remains fragmented and focused on data pipelines rather than integrated intelligence. As a result, transforming EO data into actionable insights is slow, difficult to scale, and poorly aligned with the needs of non space industries. Meanwhile, global digital leaders are advancing rapidly with geospatial foundation models, world models and agentic AI systems that reason across heterogeneous data. Without a comparable European capability, much of the value generated from European EO assets risks being externalised.To address this, the proposed activity aims to prototype a World Agentic Engi",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187959"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187959",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "LIFE/CINEA",
@@ -39,7 +40,8 @@
     "Score": "2",
     "Matched Terms": "nature",
     "Theme": "Strategic Nature Projects (SNaP). Deadline phase: Concept notes.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/strategic-nature-projects-snap-1_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/strategic-nature-projects-snap-1_en",
+    "Call Lens": "LIFE strategic project - likely larger partnership"
   },
   {
     "Source": "ECMWF Copernicus",
@@ -60,7 +62,8 @@
     "Score": "5",
     "Matched Terms": "CAMS, solar radiation",
     "Theme": "Complementary products for the CAMS solar radiation service segment",
-    "URL": "https://ted.europa.eu/en/notice/-/detail/497659-2026"
+    "URL": "https://ted.europa.eu/en/notice/-/detail/497659-2026",
+    "Call Lens": "Procurement tender - supplier or subcontractor bid, not a grant"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -81,7 +84,8 @@
     "Score": "7",
     "Matched Terms": "artificial intelligence, edge, processing, satellite, validation",
     "Theme": "Scientific analysis and exploitation of space data Scientific analysis and exploitation of space data Scientific analysis and exploitation of space data Expected Outcome: Project results are expected to contribute to the following expected outcomes: European space science breakthroughs fostered by data analysis and exploitation of European missions (incl. low-cost/small satellite) and instruments, in conjunction, when relevant, with international missions. This data may also originate from European in-orbit validation experiments with a focus on space science and exploration. A higher number of European scientific publications based on space data, high-level data products made available thro",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL4-2026-SPACE-03-61"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL4-2026-SPACE-03-61",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "ESA-star",
@@ -102,7 +106,8 @@
     "Score": "2",
     "Matched Terms": "sar, validation",
     "Theme": "The objective of this activity is to develop a physically-based framework that describes and simulates the temporal variation and fluctuations of the scattered SAR signal induced by vegetation. To achieve this, the Contractor shall define such framework and its architecture, along with the necessary interfaces, the different components, and the expected inputs and outputs, focusing on representing the scattering of SAR signals by vegetated land surfaces. The framework shall be modular and applicable to a wide range of present and future missions and scenarios, and shall allow the use and intercomparison of different modelling approaches. It shall be designed to:1. cover multiple frequencies ",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187334"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187334",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -123,7 +128,8 @@
     "Score": "6",
     "Matched Terms": "agriculture, pollution, remote sensing, water",
     "Theme": "Advancing integrated scenarios and prediction models for informing transition to a nature positive society Advancing integrated scenarios and prediction models for informing transition to a nature positive society Advancing integrated scenarios and prediction models for informing transition to a nature positive society Expected Outcome: Project results are expected to contribute to all the following expected outcomes: advanced knowledge and understanding how ecosystems respond to multiple plausible futures shaped by human-induced pressures, supporting the design of long-term, nature positive and equitable policies; strengthened collaboration across bio-physical , socio-economic and humanitie",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL6-2026-01-BIODIV-05"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL6-2026-01-BIODIV-05",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -144,7 +150,8 @@
     "Score": "7",
     "Matched Terms": "agriculture, pollution, quality, river, water",
     "Theme": "Developing managed aquifer recharge techniques (MAR) in a rural context Developing managed aquifer recharge techniques (MAR) in a rural context Developing managed aquifer recharge techniques (MAR) in a rural context Expected Outcome: Project results are expected to contribute to all of the following expected outcomes: farmers have access to water supply from managed aquifer recharge systems and to appropriate business models to cope with longer and more intense periods of water scarcity due to climate change, while preserving the good status of ground water bodies; water ecosystems are healthier and more resilient to climate change, and water related ecosystem services are protected and stre",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL6-2026-01-ZEROPOLLUTION-03"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL6-2026-01-ZEROPOLLUTION-03",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -165,7 +172,8 @@
     "Score": "9",
     "Matched Terms": "disaster, hydrological, pollution, quality, security, water",
     "Theme": "Developing methods to assess the presence, functions and sensitivity of groundwater ecosystems Developing methods to assess the presence, functions and sensitivity of groundwater ecosystems Developing methods to assess the presence, functions and sensitivity of groundwater ecosystems Expected Outcome: Project results are expected to contribute to all of the following expected outcomes: the knowledge of existing groundwater ecosystems [1] is improved, supporting policymakers and technical experts in assessments of their presence, functions and condition or status, and their role for climate change mitigation; society benefits from enhanced knowledge and awareness of pollution and overexploita",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL6-2026-01-BIODIV-02"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL6-2026-01-BIODIV-02",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "ESA-star",
@@ -186,7 +194,8 @@
     "Score": "9",
     "Matched Terms": "ai, autonomous, edge, satellite, security, validation",
     "Theme": "Objective: The objective is to develop and validate an AI-powered autonomous satellite system capable of real-time threat detectionand mitigation targeting LEO constellations. This will reducereliance on ground-based monitoring and improve resilience in satellite operations.TargetedImprovements: - 50% improvement in real-time threat detection latency / delay over ground-based solutions.-60% reduction in response time using AI-initiated autonomous countermeasures.- Development of a simulator for cyber, RF and physical attacks, enabling validation of AI-based countermeasure/mitigation solutionsintroducing a novel capability in ESA MS.Description: Current satellite security solutions depend on ",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187386"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187386",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -207,7 +216,8 @@
     "Score": "5",
     "Matched Terms": "ai, earth observation, eo",
     "Theme": "ARCH-AI addresses the rapid transition of numerical weather prediction (NWP), ocean prediction (NOP), and climate forecasting toward AI/ML-driven approaches. These methods enable faster forecasts, larger ensembles, and new probabilistic capabilities, but they fundamentally change what is required from Earth Observation.The key shift is from EO as an observational system to EO as an integralcomponent of predictive systems. This means observations are no longer just inputs; they must be optimised for AI training, inference, and continuous model evolution.Current European EO systems are strong but not designed for this paradigm. The ARCH-AI studies examines how the entire EO system-of-systems (",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/186387"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/186387",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -228,7 +238,8 @@
     "Score": "5",
     "Matched Terms": "processing, quality, remote sensing, satellite, validation",
     "Theme": "MAX-DOAS spectrometers are ground-based remote sensing instruments operating in the UV-visible spectral range and widely used for air quality observations.Through dedicated ESA activities, MAX-DOAS has been incorporated into the Fiducial Reference Measurements (FRM) framework, with the aim of harmonising instrumentation and data processing. This has led to the definition of best practices for instrument operation and the development of a prototype centralised processing system capable of delivering near-real-time data. This system was successfully demonstrated in the FRM4DOAS project.For routine satellite validation, such as for Sentinel-5 Precursor, timely and operational access to high-qua",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187965"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187965",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -249,7 +260,8 @@
     "Score": "2",
     "Matched Terms": "ai",
     "Theme": "This activity focuses on designing and optimizing Position, Velocity, and Time (PVT) engines specifically for LEO-based PNT systems. It aims to exploit the unique measurement diversity offered by LEO satellites, such as multipath whitening, Doppler utilization, and rapid LOS/NLOS transitions. Two approaches will be developed and compared: a conventional Kalman filter-based design and an AI/ML-based design to handle unexpected LEO measurement behaviours. The study will include state-of-the-art review, algorithm development, and benchmarking against traditional MEO GNSS-based engines. Field measurement campaigns will validate performance and inform a roadmap for commercialization. For more inf",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187349"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187349",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "LIFE/CINEA",
@@ -270,7 +282,8 @@
     "Score": "6",
     "Matched Terms": "LIFE, biodiversity, nature, quality",
     "Theme": "Projects on Legislative and Policy Priorities in the fields of Nature & Biodiversity and Circular Economy & Quality of Life. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/projects-legislative-and-policy-priorities-fields-nature-biodiversity-and-circular-economy-quality_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/projects-legislative-and-policy-priorities-fields-nature-biodiversity-and-circular-economy-quality_en",
+    "Call Lens": "LIFE grant - policy/environment project; user/public authority partner useful"
   },
   {
     "Source": "LIFE/CINEA",
@@ -291,7 +304,8 @@
     "Score": "4",
     "Matched Terms": "adaptation, climate",
     "Theme": "Standard Action Projects (SAPs) Climate Change Adaptation. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/climate-change-adaptation-0_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/climate-change-adaptation-0_en",
+    "Call Lens": "LIFE grant - policy/environment project; user/public authority partner useful"
   },
   {
     "Source": "LIFE/CINEA",
@@ -312,7 +326,8 @@
     "Score": "2",
     "Matched Terms": "climate",
     "Theme": "Standard Action Projects (SAPs) Climate Change Mitigation. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/climate-change-mitigation-0_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/climate-change-mitigation-0_en",
+    "Call Lens": "LIFE grant - policy/environment project; user/public authority partner useful"
   },
   {
     "Source": "LIFE/CINEA",
@@ -333,7 +348,8 @@
     "Score": "3",
     "Matched Terms": "climate, governance",
     "Theme": "Standard Action Projects (SAPs) Climate Governance and Information. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/climate-governance-and-information-0_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/climate-governance-and-information-0_en",
+    "Call Lens": "LIFE grant - policy/environment project; user/public authority partner useful"
   },
   {
     "Source": "LIFE/CINEA",
@@ -354,7 +370,8 @@
     "Score": "4",
     "Matched Terms": "environment, pollution, zero pollution",
     "Theme": "Standard Action Projects (SAPs) for Circular Economy and Zero Pollution - Environment. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/standard-action-projects-saps-circular-economy-and-zero-pollution-environment-0_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/standard-action-projects-saps-circular-economy-and-zero-pollution-environment-0_en",
+    "Call Lens": "LIFE grant - policy/environment project; user/public authority partner useful"
   },
   {
     "Source": "LIFE/CINEA",
@@ -375,7 +392,8 @@
     "Score": "4",
     "Matched Terms": "biodiversity, nature",
     "Theme": "Standard Action Projects (SAPs) for nature and biodiversity - Nature. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/standard-action-projects-saps-nature-and-biodiversity-nature-1_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/standard-action-projects-saps-nature-and-biodiversity-nature-1_en",
+    "Call Lens": "LIFE grant - policy/environment project; user/public authority partner useful"
   },
   {
     "Source": "LIFE/CINEA",
@@ -396,7 +414,8 @@
     "Score": "5",
     "Matched Terms": "biodiversity, governance, nature",
     "Theme": "Standard Action Projects (SAPs) for nature and biodiversity \u2013 Governance and Information. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/standard-action-projects-saps-nature-and-biodiversity-governance-and-information-0_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/standard-action-projects-saps-nature-and-biodiversity-governance-and-information-0_en",
+    "Call Lens": "LIFE grant - policy/environment project; user/public authority partner useful"
   },
   {
     "Source": "LIFE/CINEA",
@@ -417,7 +436,8 @@
     "Score": "2",
     "Matched Terms": "climate",
     "Theme": "Technical Assistance for the preparation of SIPs - Climate. Deadline phase: Deadline.",
-    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/technical-assistance-preparation-sips-climate-0_en"
+    "URL": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/technical-assistance-preparation-sips-climate-0_en",
+    "Call Lens": "LIFE technical assistance - specialist support role may fit"
   },
   {
     "Source": "ECMWF Copernicus",
@@ -438,7 +458,8 @@
     "Score": "2",
     "Matched Terms": "climate",
     "Theme": "European reference framework for climate scenarios",
-    "URL": "https://ted.europa.eu/en/notice/-/detail/444119-2026"
+    "URL": "https://ted.europa.eu/en/notice/-/detail/444119-2026",
+    "Call Lens": "Procurement tender - supplier or subcontractor bid, not a grant"
   },
   {
     "Source": "ESA-star",
@@ -459,7 +480,8 @@
     "Score": "3",
     "Matched Terms": "on-board, satellite",
     "Theme": "Objective: To develop a complete Software product portfolio of building blocks facilitating the integration of ADHA platforms in Mid-size LEO satellite platforms.Description: The Advanced Data Handling Architecture (ADHA) has been developed as a set of hardware components with standardized communication interfaces. Previous work has focused on the hardware aspects, but the current situation highlights the need for a robust software stack to support ADHA in space missions, in particular mid-sized LEO satellites. The main concern is to ensure that enough software components are ready for use in flight and developed using modern, modular techniques to enhance compatibility and performance. This",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187954"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187954",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ECMWF Copernicus",
@@ -480,7 +502,8 @@
     "Score": "4",
     "Matched Terms": "EQC, emission",
     "Theme": "EQC of emission and surface fluxes products: prototype EQC activities for global products",
-    "URL": "https://ted.europa.eu/en/notice/-/detail/481208-2026"
+    "URL": "https://ted.europa.eu/en/notice/-/detail/481208-2026",
+    "Call Lens": "Procurement tender - supplier or subcontractor bid, not a grant"
   },
   {
     "Source": "ESA-star",
@@ -501,7 +524,8 @@
     "Score": "5",
     "Matched Terms": "civil security, earth observation, security",
     "Theme": "Objective:The objective of this study is to assess the feasibility of applying Common Criteria framework (or equivalent) to guarantee compatible security mechanisms with HydRON (High-throughput Optical Network).Targeted Improvements:To achieve security interoperability of HydRON with other networks with a clear protection profile definition in line with international standards.Description:Multiple constellations are expected to be developed in the coming years, addressing different applications, like navigation, Earth Observation and communications as well as defence. Each constellation will be optimized for the target application, in terms of technologies, coverage, but also security functi",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187379"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187379",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -522,7 +546,8 @@
     "Score": "4",
     "Matched Terms": "earth observation, eo, satellite",
     "Theme": "The European Earth Observation (EO) Ecosystem is a cross-cutting vision for the future of Space Earth Observation, addressing future opportunities, challenges as well as trends and drivers which potentially impact the EO Ecosystem in the time horizon 2050+.Embedded in this framework, the activity \"Impact of satellite re-entries and rocket launches on the Earth Atmosphere - Earth Observation monitoring architecture concept study\" will help to prepare the foundation to understand how space debris impacts the atmospheric composition and climate system. Therefore, the study scope is to assess which observation capacities are already in place (e.g. on current / planned EO missions -or atmospheric",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/185673"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/185673",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -543,7 +568,8 @@
     "Score": "3",
     "Matched Terms": "onboard, processing",
     "Theme": "This activity aims to prepare a future in-orbit demonstrator of novel Positioning, Navigation and Timing (PNT) concepts based on quantum technologies. The study will investigate the integration of quantum inertial sensors, advanced timing techniques, including optical clocks, and hybrid navigation architectures combining quantum and classical sensors.Emphasis will be placed on system resilience, autonomy and GNSS-independent navigation including applications in Earth orbit and beyond. The activity will include system-level definition, performance assessment and critical pre-developments, including sensor fusion and onboard processing techniques.The objective is to mature concepts and associa",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187357"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187357",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -564,7 +590,8 @@
     "Score": "3",
     "Matched Terms": "earth observation, processing",
     "Theme": "AURION aims to establish a structured pre-Phase-0 co-design environment in which scientific ambition and industrial feasibility aredeveloped concurrently to define credible, innovative Earth Observation mission concepts.The activity targets mission concepts at SRL =3 that have not previously been assessed within ESA, and enables their maturation through joint science-industry system-level design, including early assessment of technical feasibility, cost drivers, and programmatic viability.AURION studies are characterised by:Joint science-industry leadership (mandatory co-design) Concurrent SRL and TRL maturationFocus on novel mission concepts, not incremental extensions Early integration of ",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187330"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187330",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ECMWF Copernicus",
@@ -585,7 +612,8 @@
     "Score": "10",
     "Matched Terms": "C3S, evidence layer, forecast, reanalysis",
     "Theme": "Development of an event-linked counterfactual diagnostic evidence layer based on ECMWF forecast and reanalysis information in support of the C3S Operational Attribution Office",
-    "URL": "https://ted.europa.eu/en/notice/-/detail/518829-2026"
+    "URL": "https://ted.europa.eu/en/notice/-/detail/518829-2026",
+    "Call Lens": "Procurement tender - supplier or subcontractor bid, not a grant"
   },
   {
     "Source": "ESA-star",
@@ -606,7 +634,8 @@
     "Score": "17",
     "Matched Terms": "drought, eo, hydrology, inland water, pollution, quality, river, water, wetland",
     "Theme": "Single procurement with 4 separate and independent contracts to develop scalable EO-based solutions: River Connectivity: Monitorriver connectivity and flow alterations, quantify impacts on river hydrology and aquatic ecosystems, and identify restoration opportunities. Inland Water Pollution: EO-based detection-attribution framework to monitor freshwater quality and link water pollution to the sources and drivers of pollution across rivers and lakes. Drought Risk Monitoring: EO-based drought risk monitoring framework to detect, characterise, and track drought conditions across river basins, supporting climate-resilient water management. Essential Wetland Variables for Wetland Condition: EO-ba",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187359"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187359",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -627,7 +656,8 @@
     "Score": "3",
     "Matched Terms": "drone",
     "Theme": "Counter-drone systems Counter- drone systems Counter-drone systems Expected Impact: The results of the activities should contribute to support common procurement, leading to strengthening the cooperation among Member States and associated countries, as well as to greater interoperability. Furthermore, they should contribute to the replenishment of depleted stockpiles of counter-drone systems, to the increase of existing stockpiles or to establishment of defence industrial readiness pool, as well as to the development and reinforcement of counter-drone solutions as drones are being increasingly perceived as a pressing threat. Objective: This topic aims at actions supporting the common procure",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/EDF-EDIP-P-2026-FNLC-CPA-CDS"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/EDF-EDIP-P-2026-FNLC-CPA-CDS",
+    "Call Lens": "EU defence grant/procurement support - check restrictions and partners"
   },
   {
     "Source": "ESA-star",
@@ -648,7 +678,8 @@
     "Score": "3",
     "Matched Terms": "earth observation, eo",
     "Theme": "IMPACT 10 is an ESA Earth Observation activity aimed at assessing and demonstrating the scientific and socio economic value generated by selected activities of the Earth and Mission Science Division (EOP SM). It focuses on scientific studies, mission science contributions, and programme enabling work supporting future EO missions. It also covers a new branch of \"Future Science\" activities. Within EOP SM, \"Future Science\" refers to forward looking science studies aligned with the ESA EO Science Strategy. These studies are designed to address fundamental Earth system science gaps that are not covered by current or planned missions. They therefore go beyond the scope of existing Science Plans a",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190745"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190745",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -669,7 +700,8 @@
     "Score": "3",
     "Matched Terms": "earth observation, eo",
     "Theme": "EGV Pilot is an ESA pilot study aimed at structuring, mapping and assessing the geodetic foundations required to support future Earth Observation missions and Earth system science. The activity focuses on the role of geodetic observations and products as foundational enablers for Earth system monitoring, mission preparation, and the generation of long term geodetic data records. It builds on internationally coordinated developments on Essential Geodetic Variables (EGVs), in particular within GGOS and IAG, and translates these advances into an ESA-relevant framework aligned with the Earth Observation Science Strategy (EOSS), FutureEO missions, and other ESA programmatic elements. The study wi",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190264"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190264",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "ESA-star",
@@ -690,7 +722,8 @@
     "Score": "5",
     "Matched Terms": "earth observation, eo, quality, validation",
     "Theme": "Stepping Stone Missions are a new class of user driven Earth Observation missions designed to address gaps in the current EO ecosystem by delivering quality certified data and services tailored to environmental policy needs at European and global level. They build on and complement existing reference missions and infrastructures, while targeting observation domains and sampling requirements not adequately covered today. A key characteristic is their service oriented and commercially minded nature: missions are conceived from the outset to enable operational services, foster downstream applications, and evolve into scalable, privately operated constellations once their performance and utility",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187367"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187367",
+    "Call Lens": "ESA tender - supplier bid; partner/user need depends on ITT"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -711,7 +744,8 @@
     "Score": "13",
     "Matched Terms": "Copernicus, agriculture, civil security, disaster, emergency, security, validation, water",
     "Theme": "Climate security and civil preparedness \u2013 new ways to develop pre- and post-crisis climate-change related scenarios for a more resilient Europe Climate security and civil preparedness \u2013 new ways to develop pre- and post-crisis climate-change related scenarios for a more resilient Europe Climate security and civil preparedness \u2013 new ways to develop pre- and post-crisis climate-change related scenarios for a more resilient Europe Expected Outcome: Project results are expected to contribute to some or all of the following expected outcomes: Identification and prioritization of climate security scenarios, assessing cascading and compounding risks across multiple sectors; Development and validati",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-DRS-05"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-DRS-05",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -732,7 +766,8 @@
     "Score": "6",
     "Matched Terms": "civil security, security, water",
     "Theme": "Improving capabilities of law enforcement to counter climate-related challenges Improving capabilities of law enforcement to counter climate-related challenges Improving capabilities of law enforcement to counter climate-related challenges Expected Outcome: Project results are expected to contribute to some or all of the following expected outcomes: Police Authorities in Europe are equipped with specialised skills and technologies to counter an increase in illegal activities related to the climate change and the emergence of new (opportunistic) criminal patterns; Improved understanding by policymakers of the effects of climate change on law enforcement with a view of developing related effec",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-FCT-01"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-FCT-01",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -753,7 +788,8 @@
     "Score": "6",
     "Matched Terms": "civil security, critical infrastructure, security",
     "Theme": "Security challenges of the green transition in urban und peri urban areas Security challenges of the green transition in urban und peri urban areas Security challenges of the green transition in urban und peri urban areas Expected Outcome: Project results are expected to contribute to some or all of the following outcomes: Identification and analysis of potential new security risks related to innovative technologies being deployed in the urban and peri-urban environments; Innovative and modern tools to identify and measure changes in urban and peri-urban areas caused by the green transition, insofar as they concern security and possible resilience approaches; Verification of measures counter",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-INFRA-02"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-INFRA-02",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -774,7 +810,8 @@
     "Score": "17",
     "Matched Terms": "civil security, critical entities, critical infrastructure, critical infrastructures, disaster, emergency, resilience of critical entities, security",
     "Theme": "Targeted innovative capabilities for the resilience of critical entities to natural and human-induced disasters, including hybrid scenarios Targeted innovative capabilities for the resilience of critical entities to natural and human-induced disasters , including hybrid scenarios Targeted innovative capabilities for the resilience of critical entities to natural and human-induced disasters, including hybrid scenarios Expected Outcome: Project results are expected to contribute to some or all of the following outcomes: Improved understanding of systemic vulnerabilities of critical entities including physical, digital, operational, and cross-sectoral dimensions, in the face of compound natural",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-INFRA-03"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-INFRA-03",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "EU Funding & Tenders",
@@ -795,7 +832,8 @@
     "Score": "16",
     "Matched Terms": "civil security, critical entities, critical infrastructure, critical infrastructures, geospatial, resilience of critical entities, security, stress tests of critical infrastructure, validation",
     "Theme": "Tools and processes to support stress tests of critical infrastructure Tools and processes to support stress tests of critical infrastructure Tools and processes to support stress tests of critical infrastructure Expected Outcome: Project results are expected to contribute to some or all of the following outcomes: Critical infrastructure operators and authorities have access to efficient, adaptable, resilient and reliable tools and processes enabling or improving virtual and physical stress tests of their respective assets/ and operations; Critical entities have broader and deeper understanding of their technical and operational vulnerabilities and adaptive capabilities, improving the scenar",
-    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-INFRA-01"
+    "URL": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2026-01-INFRA-01",
+    "Call Lens": "EU Horizon grant - consortium/project proposal, partner role likely"
   },
   {
     "Source": "ESA-star",
@@ -816,7 +854,8 @@
     "Score": "2",
     "Matched Terms": "onboard",
     "Theme": "This procurement covers the provision of Flight Operations Support Services for Copernicus missions operated by ESOC for the period2027-2032. The scope includes the support to all activities required for the preparation and execution of flight operations, such as routine operations, LEOP, commissioning, and end-of-life/deorbiting. It encompasses all key technical disciplines needed to ensuresafe and reliable operations.The service shall ensure continuity with the current contract through a structured phase-in, enabling a progressive ramp-up to full operational readiness. The service shall deliver the agility required to onboard the new Copernicus Expansion missions entrusted to ESOC while ma",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190758"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190758",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -837,7 +876,8 @@
     "Score": "7",
     "Matched Terms": "critical infrastructure, earth observation, eo, satellite",
     "Theme": "ERS-EO Proof of Concept on Critical Infrastructure ManagementThe ERS-EO Element 1 Critical Infrastructure Monitoring Prof of Concept is intended to demonstrate the step improvement for enhanced monitoring and management of critical infrastructure resulting from the effective combination of diverse EO and non-EO capabilities representative of the future Earth Observation Governmental Service (EOGS) capacity. In particular, the customization and fusion of these capabilities will generate significant improvements in tasking response, persistent data collection, information delivery latency, expanded information content andflexibility and adaptability in response to dynamic situations. In this c",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192546"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192546",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -858,7 +898,8 @@
     "Score": "5",
     "Matched Terms": "disaster, earth observation, eo",
     "Theme": "As part of the European Resilience from Space - Earth Observation (ERS-EO) Element 2 Programme, and in line with the Space Resilience Node (SRN) Workplan 2026 approved on 26th February 2026, ESA intends to issue a competitive tender (ERS-SRN-02) for one (1) harmonization study (up to 300k, 5 - 12 months) which will consolidate the findings from individual SRN User Needs Studies (see Tender Action 1000046333). The objective of the study is to derive or confirm common user needs and requirements for SRNs to inform the SRN Reference Framework, and to identify gaps in space-enabled products to support SRN users' public protection and disaster response activities.",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187373"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/187373",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -879,7 +920,8 @@
     "Score": "4",
     "Matched Terms": "quality, uav",
     "Theme": "HE-ESA-035 Stage 1 - EGNOS NEXT: System of Systems engineering trade-offsThe activity aims at performing system studies supporting the definition and future development of EGNOS as a system of segments providing complementary services (Rail, UAV, Automotive, Maritime) to the current version of EGNOS implementing ICAO standards. This activity belongs to Galileo/EGNOS Upstream RD which is part of the space component of Horizon Europe, under which, in line with the signed FFPA and relevant Contribution Agreement, ESA isdelegated by the European Commission to manage this activity. ESA adapted procurement rules will apply as per the ITT to be published (open Competition in 2 stages). ESA reserves",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/193773"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/193773",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -900,7 +942,8 @@
     "Score": "2",
     "Matched Terms": "on-board",
     "Theme": "Objective: Demonstrate the capability and feasibility of high-performance entangled photon sources and their monitoring testbed in space.TargetedImprovements:Creating a capability in Europe and Canada currently not present, to experiment with the operation andperformance of quantum communication sourcesin orbit, enabling future quantum communication systems.Description: Entangled photonsources are at the heart of many technological applications, including novel space-based quantum information networks (QIN).Demonstrating the capability and feasibility of high-performance entangled photon sources in space is an essential step to unlock these maturingtechnologies for emerging quantum communica",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/186404"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/186404",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -921,7 +964,8 @@
     "Score": "4",
     "Matched Terms": "earth observation, processing, validation",
     "Theme": "ASGARD library is a reusable software component providing the geometric computation services required by modern Earth Observation processing systems within the EOPF ecosystem. The primary objective of this activity is the operational qualification, maintenance, and evolution of ASGARD, including performance hardening, validation, and support to its downstream integration and use.",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192135"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192135",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -942,7 +986,8 @@
     "Score": "5",
     "Matched Terms": "disaster, earth observation, eo",
     "Theme": "This tender covers stakeholder and user engagement, coordination, requirements consolidation, communication and capacity building relating to the development of Earth Observation (EO) services for climate change adaptation and disaster risk reduction in Bangladesh, Bhutan, India, the Maldives, Nepal, Pakistan and Sri Lanka. It is one of two tenders being implemented as part of the 'Support toDisaster Risk Reduction through Earth Observation and Climate Services in South Asia' (SADRR) initiative (2026-2029), which is being carried out in partnership with the Coalition for Disaster Resilient Infrastructure (CDRI), and funded by the Directorate-General for International Partnerships (DG INTPA) ",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192543"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192543",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -963,7 +1008,8 @@
     "Score": "5",
     "Matched Terms": "disaster, earth observation, eo",
     "Theme": "This tender covers the development of products and frameworks for users and stakeholders of Earth Observation (EO) services for climate change adaptation and disaster risk reduction in Bangladesh, Bhutan, India, the Maldives, Nepal, Pakistan and Sri Lanka. This tender is one of two being implemented as part of the 'Support to Disaster Risk Reduction through Earth Observation and Climate Services in South Asia' (SADRR) initiative (2026-2029). The initiative is being carried out in partnership with the Coalition for Disaster Resilient Infrastructure (CDRI) and is funded by the Directorate-General for International Partnerships (DG INTPA) as part of the Global Gateway initiative.",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192542"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/192542",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -984,7 +1030,8 @@
     "Score": "7",
     "Matched Terms": "earth observation, eo, quality, water",
     "Theme": "Sustainable mineral resource management involves the responsible extraction, use, and conservation of mineral resources to meet present needs without compromising the ability of future generations to meet theirs. It emphasizes efficient mining practices, minimizing environmental impacts, and restoring ecosystems after extraction. An important component of this approach is the use of Earth observation technologies, which allow the detection of (critical earth) minerals, continuous monitoring of mining activities, land degradation and water quality. The development of novel EO solutions and tools improve transparency, support better decision-making, andhelp detect unsustainable practices in ne",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/186396"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/186396",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -1005,7 +1052,8 @@
     "Score": "4",
     "Matched Terms": "autonomous, machine learning, security",
     "Theme": "Today, mission ground segment systems face increasingly sophisticated and fast-movingcyber threats that can evade static or rule-based detection tools and overwhelm traditionalrecovery procedures. As attacks grow more pervasive, dynamic and subtle, currentapproaches, such as rule-based or ticket driven responses struggle to react at the requiredspeed, resulting in prolonged attacker dwelltime and potential disruption of critical missionoperations, if an attack is detected at all.Real-time automated responses or self-healing' mechanisms, such as fall-back tosecure/minimum configurations, runtime policy/rule change, trusted state reconstitution, orrapid tear-down and re-deploy of compromised s",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190749"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/190749",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   },
   {
     "Source": "ESA-star",
@@ -1026,6 +1074,7 @@
     "Score": "5",
     "Matched Terms": "ai, earth observation, quality",
     "Theme": "The User Management Service contract will encompass a comprehensive suite of offeringsdesigned to support and enhance user interactions and experience for ESA and Third PartyEO Missions.This service contract aims at integrating the User Communication and Information Portaltogether with the User Management functions, covered in the past by separate contracts,whereby ensuring autonomy to Industry in designing and using communication tools asadditional instrument to reach and stimulate a dynamic and variegated user community.The Information Portal is expected to provide seamless access to relevant content and data,Graphical and Editorial Servicesshall deliver visually engaging and professionall",
-    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/193149"
+    "URL": "https://esastar-publication-ext.sso.esa.int/ESATenderActions/details/193149",
+    "Call Lens": "ESA tender pipeline - prepare early, watch for ITT package"
   }
 ]

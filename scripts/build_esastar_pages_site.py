@@ -38,7 +38,7 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def normalize_esa(row: dict[str, str]) -> dict[str, str]:
-    return {
+    normalized = {
         "Source": "ESA-star",
         "Provider": "ESA",
         "Programme": "",
@@ -59,12 +59,14 @@ def normalize_esa(row: dict[str, str]) -> dict[str, str]:
         "Theme": row.get("Theme", ""),
         "URL": row.get("ESA-star", ""),
     }
+    normalized["Call Lens"] = classify_call(normalized)
+    return normalized
 
 
 def normalize_row(source: str, row: dict[str, str]) -> dict[str, str]:
     if source == "ESA-star":
         return normalize_esa(row)
-    return {
+    normalized = {
         "Source": row.get("Source", source),
         "Provider": row.get("Provider", source),
         "Programme": row.get("Programme", ""),
@@ -85,6 +87,40 @@ def normalize_row(source: str, row: dict[str, str]) -> dict[str, str]:
         "Theme": row.get("Theme", ""),
         "URL": row.get("URL", ""),
     }
+    normalized["Call Lens"] = classify_call(normalized)
+    return normalized
+
+
+def classify_call(row: dict[str, str]) -> str:
+    source = row.get("Source", "").lower()
+    text = " ".join(
+        row.get(field, "")
+        for field in ("Source", "Provider", "Programme", "Type", "Title", "Consortium Burden", "Theme")
+    ).lower()
+
+    if "business applications" in text or " bass" in f" {text} ":
+        return "Business/application call - expect customer, user, or business case evidence"
+    if "esa-star" in source:
+        if row.get("Status", "").lower() == "intended":
+            return "ESA tender pipeline - prepare early, watch for ITT package"
+        return "ESA tender - supplier bid; partner/user need depends on ITT"
+    if "ecmwf" in source:
+        return "Procurement tender - supplier or subcontractor bid, not a grant"
+    if "ungm" in source or "fao" in source:
+        return "UN procurement - supplier tender; registration and tender documents required"
+    if "life" in source:
+        if "strategic" in text:
+            return "LIFE strategic project - likely larger partnership"
+        if "technical assistance" in text:
+            return "LIFE technical assistance - specialist support role may fit"
+        return "LIFE grant - policy/environment project; user/public authority partner useful"
+    if "horizon" in text:
+        if "research and innovation" in text or "innovation action" in text:
+            return "EU Horizon grant - consortium/project proposal, partner role likely"
+        return "EU grant - check consortium and eligibility rules"
+    if "edf" in text:
+        return "EU defence grant/procurement support - check restrictions and partners"
+    return "General opportunity - verify source rules and required role"
 
 
 def sort_key(row: dict[str, str]) -> tuple[int, int, str]:
@@ -143,6 +179,7 @@ def render_table(rows: list[dict[str, str]]) -> str:
             f"<td>{table_link(row)}</td>"
             f"<td>{html.escape(row.get('Status', ''))}</td>"
             f"<td>{html.escape(row.get('Type', ''))}</td>"
+            f"<td>{html.escape(clip(row.get('Call Lens', ''), 180))}</td>"
             f"<td>{html.escape(clip(row.get('Geography / Eligibility', ''), 180))}</td>"
             f"<td>{html.escape(clip(row.get('Consortium Burden', ''), 180))}</td>"
             f"<td>{html.escape(row.get('Opened', ''))}</td>"
@@ -316,6 +353,7 @@ def main() -> int:
             <th>Title</th>
             <th>Status</th>
             <th>Type</th>
+            <th>Call Lens</th>
             <th>Geography / Eligibility</th>
             <th>Consortium / Partner Note</th>
             <th>Opening Date</th>
