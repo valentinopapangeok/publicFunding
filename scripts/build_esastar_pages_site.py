@@ -140,11 +140,28 @@ def sort_key(row: dict[str, str]) -> tuple[int, int, str]:
     return (urgency_rank.get(urgency, 9), days, row.get("Title", "").lower())
 
 
+def partner_bucket(row: dict[str, str]) -> str:
+    burden = row.get("Consortium Burden", "").lower()
+    lens = row.get("Call Lens", "").lower()
+    source = row.get("Source", "").lower()
+    text = " ".join([burden, lens, source, row.get("Type", "").lower(), row.get("Programme", "").lower()])
+
+    if "high -" in burden or "consortium likely" in text or "horizon ria/ia" in text or "strategic project" in text:
+        return "Consortium needed"
+    if "business/application" in lens or "customer" in lens or "partner/user" in text or "public authority partner" in text:
+        return "Partner needed"
+    if "life grant" in lens or "eu grant" in lens or "technical assistance" in text:
+        return "Partner needed"
+    return "No partner needed"
+
+
 def load_rows() -> tuple[list[dict[str, str]], dict[str, int]]:
     rows: list[dict[str, str]] = []
     source_counts: dict[str, int] = {}
     for source, path in SOURCE_CSVS:
         source_rows = [normalize_row(source, row) for row in read_csv(path)]
+        for row in source_rows:
+            row["Partner Need"] = partner_bucket(row)
         rows.extend(source_rows)
         source_counts[source] = len(source_rows)
     rows.sort(key=sort_key)
@@ -171,6 +188,8 @@ def clip(value: str, limit: int = 260) -> str:
 
 
 def render_table(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return "<tr><td colspan='16' class='empty'>No matching opportunities in this section.</td></tr>"
     cells = []
     for row in rows:
         urgency = urgency_key(row.get("Urgency", ""))
@@ -199,8 +218,71 @@ def render_table(rows: list[dict[str, str]]) -> str:
     return "\n".join(cells)
 
 
+def grouped_rows(rows: list[dict[str, str]]) -> list[tuple[str, str, list[dict[str, str]]]]:
+    groups = [
+        (
+            "No partner needed",
+            "Supplier tenders and procurement-style routes where Geo-K can likely assess or bid directly, subject to registration and tender documents.",
+        ),
+        (
+            "Partner needed",
+            "Calls where a named user, customer, public authority, or specialist partner would materially strengthen the route.",
+        ),
+        (
+            "Consortium needed",
+            "High-burden grants and strategic projects where a formal consortium or large partnership is likely required.",
+        ),
+    ]
+    return [(name, note, [row for row in rows if row.get("Partner Need") == name]) for name, note in groups]
+
+
+def render_grouped_tables(rows: list[dict[str, str]]) -> str:
+    sections = []
+    for name, note, group_rows in grouped_rows(rows):
+        sections.append(
+            f"""
+    <section class="result-section">
+      <div class="section-head">
+        <h2>{html.escape(name)}</h2>
+        <span class="metric"><strong>{len(group_rows)}</strong>opportunities</span>
+      </div>
+      <p>{html.escape(note)}</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Urgency</th>
+              <th>Days</th>
+              <th>Source</th>
+              <th>Giver</th>
+              <th>Call / Topic</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Type</th>
+              <th>Call Lens</th>
+              <th>Geography / Eligibility</th>
+              <th>Consortium / Partner Note</th>
+              <th>Opening Date</th>
+              <th>Deadline</th>
+              <th>Clarification</th>
+              <th>Theme</th>
+              <th>Match</th>
+            </tr>
+          </thead>
+          <tbody>
+            {render_table(group_rows)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+"""
+        )
+    return "\n".join(sections)
+
+
 def render_summary(source_counts: dict[str, int], rows: list[dict[str, str]]) -> str:
     by_urgency = Counter(urgency_key(row.get("Urgency", "")) for row in rows)
+    by_partner = Counter(row.get("Partner Need", "No partner needed") for row in rows)
     source_items = "".join(
         f"<span class='metric'><strong>{html.escape(source)}</strong>{count}</span>"
         for source, count in source_counts.items()
@@ -209,6 +291,10 @@ def render_summary(source_counts: dict[str, int], rows: list[dict[str, str]]) ->
         f"<span class='metric'><strong>{html.escape(label)}</strong>{count}</span>"
         for label, count in by_urgency.items()
     )
+    partner_items = "".join(
+        f"<span class='metric'><strong>{html.escape(label)}</strong>{by_partner.get(label, 0)}</span>"
+        for label in ("No partner needed", "Partner needed", "Consortium needed")
+    )
     return f"""
       <div class="metrics">
         <span class="metric"><strong>Total</strong>{len(rows)}</span>
@@ -216,6 +302,9 @@ def render_summary(source_counts: dict[str, int], rows: list[dict[str, str]]) ->
       </div>
       <div class="metrics">
         {urgency_items}
+      </div>
+      <div class="metrics">
+        {partner_items}
       </div>
     """
 
@@ -298,6 +387,7 @@ def main() -> int:
       overflow-x: auto;
       border: 1px solid var(--line);
       background: #fff;
+      margin-top: 12px;
     }}
     table {{
       width: 100%;
@@ -321,6 +411,29 @@ def main() -> int:
     .num {{
       text-align: right;
       white-space: nowrap;
+    }}
+    .result-section {{
+      margin: 24px 0 34px;
+    }}
+    .section-head {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 9px;
+      margin-bottom: 9px;
+    }}
+    h2 {{
+      margin: 0;
+      color: var(--blue);
+      font-size: 22px;
+      letter-spacing: 0;
+    }}
+    .empty {{
+      color: var(--muted);
+      text-align: center;
+      padding: 20px;
     }}
     a {{
       color: #0f5f9c;
@@ -348,33 +461,7 @@ def main() -> int:
     <section class="panel">
       {render_summary(source_counts, rows)}
     </section>
-    <section class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Urgency</th>
-            <th>Days</th>
-            <th>Source</th>
-            <th>Giver</th>
-            <th>Call / Topic</th>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Call Lens</th>
-            <th>Geography / Eligibility</th>
-            <th>Consortium / Partner Note</th>
-            <th>Opening Date</th>
-            <th>Deadline</th>
-            <th>Clarification</th>
-            <th>Theme</th>
-            <th>Match</th>
-          </tr>
-        </thead>
-        <tbody>
-          {render_table(rows)}
-        </tbody>
-      </table>
-    </section>
+    {render_grouped_tables(rows)}
   </main>
 </body>
 </html>
