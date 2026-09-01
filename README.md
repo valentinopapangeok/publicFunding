@@ -1,12 +1,21 @@
 # Geo-K ESA-star Funding Monitor
 
-Public, sanitized monitor for active ESA-star funding opportunities relevant to Geo-K themes: Earth Observation, satellite image processing, wildfire, water, hydrology, drones/UAVs, autonomous systems, edge/on-board AI, SAR/SWIR/thermal, validation, veracity and provenance.
+Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor currently covers ESA-star; the broader monitoring roadmap covers EU Funding & Tenders, LIFE/CINEA, ECMWF Copernicus procurement, and FAO/UNGM.
 
 The monitor queries ESA-star public API data directly, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report.
 
+Geo-K themes are separated from source portals:
+
+- Source registry: `monitoring/funding-sources.json`
+- Geo-K profile: `monitoring/geok-profile.md`
+- Implementation roadmap: `monitoring/roadmap.md`
+- ESA-star keyword profile: `monitoring/esa-star/geok-keywords.json`
+
+Current Geo-K themes include Earth Observation, satellite image processing, wildfire, water/hydrology, agriculture, drones/UAVs, autonomous systems, edge/on-board AI, SAR/SWIR/thermal, validation/veracity/provenance, archaeology/cultural heritage, and critical infrastructure monitoring.
+
 ## Published Report
 
-After GitHub Pages is enabled with source set to **GitHub Actions**, the workflow publishes the site from:
+After GitHub Pages is enabled with source set to the **gh-pages branch**, the workflow publishes the site from:
 
 ```text
 site/esa-star-monitor/

@@ -1,0 +1,49 @@
+{
+  "sources": [
+    {
+      "id": "esa-star",
+      "name": "ESA-star Publication",
+      "provider": "European Space Agency",
+      "status": "implemented",
+      "public_url": "https://esastar-publication-ext.sso.esa.int/",
+      "data_access": "public JSON endpoint for tender metadata; restricted tender packages require ESA-star login",
+      "geo_k_use": "ESA Earth Action, BASS-adjacent ESA tenders, EO applications, wildfire, water, AI, drones, critical infrastructure, archaeology/cultural heritage"
+    },
+    {
+      "id": "ec-funding-tenders",
+      "name": "EU Funding & Tenders Portal",
+      "provider": "European Commission",
+      "status": "planned",
+      "public_url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/",
+      "data_access": "public SEDIA search API",
+      "geo_k_use": "Horizon Europe, Digital Europe, LIFE topics, security, space, environment, cultural heritage, civil protection, critical infrastructure"
+    },
+    {
+      "id": "life-cinea",
+      "name": "LIFE Calls for Proposals",
+      "provider": "CINEA / European Commission",
+      "status": "planned",
+      "public_url": "https://cinea.ec.europa.eu/life-calls-proposals-2026_en",
+      "data_access": "public CINEA pages and EU Funding & Tenders topic records",
+      "geo_k_use": "environment, nature, biodiversity, climate adaptation, water, wildfire resilience, restoration, monitoring and governance"
+    },
+    {
+      "id": "ecmwf-copernicus",
+      "name": "ECMWF Copernicus Procurement",
+      "provider": "ECMWF",
+      "status": "planned",
+      "public_url": "https://www.ecmwf.int/en/about/suppliers/copernicus-procurement/update-itts",
+      "data_access": "public ECMWF procurement pages; tender response through ECMWF eProcurement Portal",
+      "geo_k_use": "Copernicus Climate Change Service, Copernicus Atmosphere Monitoring Service, climate data processing, quality control, validation, reanalysis and operational evidence layers"
+    },
+    {
+      "id": "fao-ungm",
+      "name": "FAO / UNGM Procurement Opportunities",
+      "provider": "FAO via United Nations Global Marketplace",
+      "status": "planned",
+      "public_url": "https://www.ungm.org/Public/Notice",
+      "data_access": "public notices through UNGM; supplier participation requires UNGM registration; API access needs further validation",
+      "geo_k_use": "agriculture, crop monitoring, geospatial analytics, food security, drought, water resources, forestry, resilience and emergency mapping"
+    }
+  ]
+}

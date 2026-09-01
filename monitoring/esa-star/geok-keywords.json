@@ -42,7 +42,24 @@
     "veracity",
     "validation",
     "quality",
-    "provenance"
+    "provenance",
+    "archaeology",
+    "archaeological",
+    "cultural heritage",
+    "heritage",
+    "built heritage",
+    "monument",
+    "ancient",
+    "critical infrastructure",
+    "critical infrastructures",
+    "critical entities",
+    "infrastructure resilience",
+    "resilience of critical entities",
+    "stress tests of critical infrastructure",
+    "civil security",
+    "disaster",
+    "emergency",
+    "security"
   ],
   "exclude_keywords": [
     "launch vehicle",
@@ -89,7 +106,16 @@
     "oscillator chip",
     "laser source",
     "aperture",
-    "reflector"
+    "reflector",
+    "assembly",
+    "component manufacturing",
+    "mechanism",
+    "actuator",
+    "thermal control hardware",
+    "electronic unit",
+    "power unit",
+    "battery cell",
+    "structural panel"
   ],
   "anchor_keywords": [
     "earth observation",
@@ -128,7 +154,18 @@
     "processing support service",
     "eo product",
     "capacity building",
-    "user engagement"
+    "user engagement",
+    "archaeology",
+    "archaeological",
+    "cultural heritage",
+    "heritage monitoring",
+    "critical infrastructure",
+    "critical infrastructures",
+    "critical entities",
+    "infrastructure resilience",
+    "civil security",
+    "disaster",
+    "emergency management"
   ],
   "minimum_score": 2,
   "priority_terms": {
@@ -153,6 +190,17 @@
     "sar": 1,
     "swir": 1,
     "veracity": 2,
-    "validation": 1
+    "validation": 1,
+    "archaeology": 3,
+    "archaeological": 3,
+    "cultural heritage": 3,
+    "heritage": 2,
+    "critical infrastructure": 3,
+    "critical infrastructures": 3,
+    "critical entities": 3,
+    "infrastructure resilience": 3,
+    "civil security": 2,
+    "disaster": 2,
+    "emergency": 2
   }
 }
