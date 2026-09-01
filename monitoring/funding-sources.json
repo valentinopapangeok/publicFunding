@@ -44,6 +44,33 @@
       "public_url": "https://www.ungm.org/Public/Notice",
       "data_access": "public notices through UNGM; supplier participation requires UNGM registration; API access needs further validation",
       "geo_k_use": "agriculture, crop monitoring, geospatial analytics, food security, drought, water resources, forestry, resilience and emergency mapping"
+    },
+    {
+      "id": "asi",
+      "name": "ASI Calls and Opportunities",
+      "provider": "Agenzia Spaziale Italiana",
+      "status": "implemented",
+      "public_url": "https://www.asi.it/bandi/",
+      "data_access": "public ASI pages and online selections; supplier participation may require ASI or procurement portal registration",
+      "geo_k_use": "Italian national space-economy calls, IRIDE, Earth Observation, geospatial services, R&D procurements and SME/industry opportunities"
+    },
+    {
+      "id": "cnr",
+      "name": "CNR Calls, Procurements and Research Selections",
+      "provider": "Consiglio Nazionale delle Ricerche",
+      "status": "implemented",
+      "public_url": "https://selezionionline.cnr.it/",
+      "data_access": "public CNR selection and URP records; individual calls may require institute-specific application routes",
+      "geo_k_use": "Earth Observation, remote sensing, satellite data, SAR, water, agriculture and partner/project intelligence across CNR institutes"
+    },
+    {
+      "id": "aeronautica-militare",
+      "name": "Aeronautica Militare Tenders",
+      "provider": "Aeronautica Militare",
+      "status": "implemented",
+      "public_url": "https://www.aeronautica.difesa.it/amministrazione-trasparente/bandi-di-gara-e-contratti/",
+      "data_access": "public tender pages; formal participation may require procurement-platform or supplier-registration steps",
+      "geo_k_use": "UAV/drone, LiDAR, aerophotogrammetry, SATCOM, SSA and defence/aeronautical geospatial procurement watch"
     }
   ]
 }

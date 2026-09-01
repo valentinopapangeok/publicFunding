@@ -18,6 +18,7 @@ SOURCE_CSVS = [
     ("ECMWF Copernicus", ROOT / "funding-scout" / "monitoring" / "ecmwf-copernicus" / "latest" / "geok-ecmwf-monitor.csv"),
     ("LIFE CINEA", ROOT / "funding-scout" / "monitoring" / "life-cinea" / "latest" / "geok-life-monitor.csv"),
     ("FAO / UNGM", ROOT / "funding-scout" / "monitoring" / "fao-ungm" / "latest" / "geok-fao-ungm-monitor.csv"),
+    ("Italian National", ROOT / "funding-scout" / "monitoring" / "italian-national" / "latest" / "geok-italian-national-monitor.csv"),
 ]
 
 COLORS = {
@@ -108,6 +109,12 @@ def classify_call(row: dict[str, str]) -> str:
         return "Procurement tender - supplier or subcontractor bid, not a grant"
     if "ungm" in source or "fao" in source:
         return "UN procurement - supplier tender; registration and tender documents required"
+    if "aeronautica" in text:
+        return "Italian defence procurement - supplier route; inspect tender documents and registration requirements"
+    if "agenzia spaziale italiana" in text or "asi national" in text:
+        return "Italian national space opportunity - verify ASI/procurement portal eligibility"
+    if "consiglio nazionale delle ricerche" in text or "cnr" in source:
+        return "CNR research/procurement signal - likely partner intelligence unless a supplier tender is present"
     if "life" in source:
         if "strategic" in text:
             return "LIFE strategic project - likely larger partnership"

@@ -13,6 +13,7 @@
 !scripts/ecmwf_monitor.py
 !scripts/life_cinea_monitor.py
 !scripts/fao_ungm_monitor.py
+!scripts/italian_sources_monitor.py
 !scripts/build_esastar_pages_site.py
 
 !monitoring/
@@ -21,6 +22,7 @@
 !monitoring/roadmap.md
 !monitoring/targeted-scouts/
 !monitoring/targeted-scouts/archaeology-eo.md
+!monitoring/targeted-scouts/italian-national-space-defense.md
 !monitoring/esa-star/
 !monitoring/esa-star/README.md
 !monitoring/esa-star/geok-keywords.json

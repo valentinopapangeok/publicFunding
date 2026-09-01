@@ -3,7 +3,7 @@ name: Geo-K Funding Monitor Pages
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * 1-5"
+    - cron: "0 6 * * *"
   push:
     branches:
       - main
@@ -40,6 +40,9 @@ jobs:
 
       - name: Run FAO UNGM monitor
         run: python3 scripts/fao_ungm_monitor.py
+
+      - name: Run Italian national sources monitor
+        run: python3 scripts/italian_sources_monitor.py
 
       - name: Build static site
         run: python3 scripts/build_esastar_pages_site.py

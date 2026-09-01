@@ -2,7 +2,7 @@
 
 Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor covers ESA-star, EU Funding & Tenders, ECMWF Copernicus procurement, LIFE/CINEA, and FAO/UNGM.
 
-The monitor queries public source data, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report.
+The monitor queries public source data, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report. It also keeps "check source" rows for relevant Italian public pages where the official HTML does not expose a machine-readable deadline.
 
 The published table includes a `Call Lens` column: a plain-language hint describing whether the row is a supplier tender, EU/Horizon-style consortium grant, LIFE project, UN procurement notice, ESA tender pipeline item, or business/application call where customer, user, or business-case evidence is likely needed.
 
@@ -12,7 +12,7 @@ Geo-K themes are separated from source portals:
 - Geo-K profile: `monitoring/geok-profile.md`
 - Implementation roadmap: `monitoring/roadmap.md`
 - ESA-star keyword profile: `monitoring/esa-star/geok-keywords.json`
-- Source scripts: `scripts/esastar_monitor.py`, `scripts/eu_ft_monitor.py`, `scripts/ecmwf_monitor.py`, `scripts/life_cinea_monitor.py`, `scripts/fao_ungm_monitor.py`
+- Source scripts: `scripts/esastar_monitor.py`, `scripts/eu_ft_monitor.py`, `scripts/ecmwf_monitor.py`, `scripts/life_cinea_monitor.py`, `scripts/fao_ungm_monitor.py`, `scripts/italian_sources_monitor.py`
 
 Current Geo-K themes include Earth Observation, satellite image processing, wildfire, water/hydrology, agriculture, drones/UAVs, autonomous systems, edge/on-board AI, SAR/SWIR/thermal, validation/veracity/provenance, archaeology/cultural heritage, and critical infrastructure monitoring.
 
@@ -32,6 +32,7 @@ python3 scripts/eu_ft_monitor.py 25
 python3 scripts/ecmwf_monitor.py
 python3 scripts/life_cinea_monitor.py
 python3 scripts/fao_ungm_monitor.py
+python3 scripts/italian_sources_monitor.py
 python3 scripts/build_esastar_pages_site.py
 ```
 
@@ -43,6 +44,7 @@ funding-scout/monitoring/eu-funding-tenders/latest/
 funding-scout/monitoring/ecmwf-copernicus/latest/
 funding-scout/monitoring/life-cinea/latest/
 funding-scout/monitoring/fao-ungm/latest/
+funding-scout/monitoring/italian-national/latest/
 site/esa-star-monitor/index.html
 site/esa-star-monitor/data.json
 ```
