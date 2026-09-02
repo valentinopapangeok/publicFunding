@@ -99,7 +99,7 @@ def classify_call(row: dict[str, str]) -> str:
         for field in ("Source", "Provider", "Programme", "Type", "Title", "Consortium Burden", "Theme")
     ).lower()
 
-    if "business applications" in text or " bass" in f" {text} ":
+    if "business applications" in text or " bass " in f" {text} ":
         return "Business/application call - expect customer, user, or business case evidence"
     if "esa-star" in source:
         if row.get("Status", "").lower() == "intended":
@@ -111,6 +111,8 @@ def classify_call(row: dict[str, str]) -> str:
         return "UN procurement - supplier tender; registration and tender documents required"
     if "aeronautica" in text:
         return "Italian defence procurement - supplier route; inspect tender documents and registration requirements"
+    if "arpa" in source or "regional environmental" in text:
+        return "Italian environmental agency procurement - supplier route; inspect agency portal and MePA/SINTEL/BDNCP requirements"
     if "agenzia spaziale italiana" in text or "asi national" in text:
         return "Italian national space opportunity - verify ASI/procurement portal eligibility"
     if "consiglio nazionale delle ricerche" in text or "cnr" in source:

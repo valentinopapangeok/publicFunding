@@ -1,6 +1,6 @@
 # Geo-K Funding Monitor
 
-Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor covers ESA-star, EU Funding & Tenders, ECMWF Copernicus procurement, LIFE/CINEA, and FAO/UNGM.
+Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor covers ESA-star, EU Funding & Tenders, ECMWF Copernicus procurement, LIFE/CINEA, FAO/UNGM, ASI, CNR, Aeronautica Militare, and ARPA regional environmental-agency tenders.
 
 The monitor queries public source data, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report. It also keeps "check source" rows for relevant Italian public pages where the official HTML does not expose a machine-readable deadline.
 

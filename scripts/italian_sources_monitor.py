@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monitor Italian national ASI, CNR and Aeronautica public opportunity pages."""
+"""Monitor Italian ASI, CNR, Aeronautica and ARPA public opportunity pages."""
 
 from __future__ import annotations
 
@@ -90,6 +90,41 @@ SOURCE_SEARCHES = {
         "search_urls": ["https://www.aeronautica.difesa.it/?s={term}"],
         "keep_link": r"aeronautica\.difesa\.it/tender/",
     },
+    "ARPA": {
+        "provider": "Italian regional environmental protection agencies",
+        "programme": "ARPA regional environmental procurements",
+        "terms": [
+            "telerilevamento",
+            "dati satellitari",
+            "geospaziale",
+            "Copernicus",
+            "Lidar",
+            "drone",
+            "UAV",
+            "monitoraggio ambientale",
+            "rischio idrogeologico",
+            "alluvioni",
+            "incendi",
+            "qualita aria",
+            "qualita acqua",
+            "HPC",
+        ],
+        "base_urls": [
+            "https://bandi.arpa.piemonte.it/",
+            "https://www.arpae.it/it/bandi-gara/2026",
+            "https://www.arpalombardia.it/amministrazione-trasparente/bandi-di-gara-e-contratti/",
+            "https://www.arpalombardia.it/amministrazione-trasparente/bandi-di-gara-e-contratti/portale-di-ricerca-per-singola-procedura-link-bdncp-e-atti-e-documenti-di-gara/",
+        ],
+        "seed_urls": [
+            "https://www.arpae.it/it/bandi-gara/2026/consultazione-preliminare-per-la-fornitura-e-installazione-dello-strumento-wind-doppler-lidar-in-dotazione-ad-arpae-simc-e-servizio-di-manutenzione",
+        ],
+        "search_urls": [
+            "https://bandi.arpa.piemonte.it/node?title_1={term}&moderation_state=stato_bando_appalto-attivo",
+            "https://bandi.arpa.piemonte.it/avvisi?title={term}",
+            "https://www.arpae.it/it/@@search?SearchableText={term}",
+        ],
+        "keep_link": r"(bandi\.arpa\.piemonte\.it/(bandi-appalti|avvisi)/|arpae\.it/it/bandi-gara/20\d{2}/|arpalombardia\.it/amministrazione-trasparente/bandi-di-gara-e-contratti/)",
+    },
 }
 
 EXTRA_TERMS = {
@@ -114,6 +149,14 @@ EXTRA_TERMS = {
     "space situational awareness": 3,
     "ssa": 2,
     "spaceitup": 3,
+    "monitoraggio ambientale": 3,
+    "rischio idrogeologico": 3,
+    "alluvioni": 3,
+    "qualita aria": 2,
+    "qualità aria": 2,
+    "qualita acqua": 2,
+    "qualità acqua": 2,
+    "hpc": 2,
     "imaging": 2,
     "acquisizione": 1,
     "manifestazione di interesse": 2,
@@ -327,12 +370,16 @@ def type_for(source: str, text: str) -> str:
         return "Research/recruitment call"
     if source == "Aeronautica Militare":
         return "Procurement"
+    if source == "ARPA":
+        return "Environmental procurement / notice"
     return "Call / notice"
 
 
 def consortium_note(source: str, kind: str) -> str:
     if source == "Aeronautica Militare":
         return "LOW/MEDIUM - supplier procurement; verify tender documents and registration route"
+    if source == "ARPA":
+        return "LOW/MEDIUM - regional public procurement; verify agency portal, MePA/SINTEL/BDNCP route and tender-specific eligibility"
     if source == "CNR" and kind == "Research/recruitment call":
         return "LOW as funding route - mainly partner/project intelligence unless procurement is present"
     if source == "ASI":
@@ -378,6 +425,37 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
         return "manifestazione di interesse" in title_l
     if source == "CNR":
         return score >= 4
+    if source == "ARPA":
+        current_year = str(datetime.now().year)
+        if "arpae.it/it/bandi-gara/" in candidate.url and f"/{current_year}/" not in candidate.url:
+            return False
+        strong_terms = {
+            "telerilevamento",
+            "dati satellitari",
+            "geospaziale",
+            "copernicus",
+            "lidar",
+            "drone",
+            "uav",
+            "monitoraggio ambientale",
+            "rischio idrogeologico",
+            "alluvioni",
+            "incendi",
+            "qualita aria",
+            "qualità aria",
+            "qualita acqua",
+            "qualità acqua",
+            "hpc",
+        }
+        if not any(term.lower() in strong_terms for term in terms):
+            return False
+        stale_markers = ("bando di gara scaduto", "aggiudicato", "archiviato", "scaduto")
+        context_l = candidate.context.lower()
+        if any(marker in context_l for marker in stale_markers) and not any(
+            marker in context_l for marker in ("attivo", "bando di gara aperto")
+        ):
+            return False
+        return score >= 3
     return True
 
 
@@ -517,7 +595,7 @@ def write_outputs(rows: list[dict[str, str]], out_dir: Path, now: datetime) -> N
         "",
         f"Generated: {now.strftime('%Y-%m-%d %H:%M')}",
         "",
-        "Scope: ASI, CNR and Aeronautica Militare public pages matching Geo-K EO/geospatial/UAV terms. Rows without machine-readable deadlines are retained as check-source items.",
+        "Scope: ASI, CNR, Aeronautica Militare and ARPA public pages matching Geo-K EO/geospatial/UAV/environmental terms. Rows without machine-readable deadlines are retained as check-source items.",
         "",
     ]
     if rows:
@@ -529,7 +607,7 @@ def write_outputs(rows: list[dict[str, str]], out_dir: Path, now: datetime) -> N
                 f"{row['Deadline']} | {row['Matched Terms']} | [source]({row['URL']}) |"
             )
     else:
-        lines.append("No active or check-source ASI/CNR/Aeronautica items matched the Geo-K profile.")
+        lines.append("No active or check-source ASI/CNR/Aeronautica/ARPA items matched the Geo-K profile.")
     (out_dir / "geok-italian-national-monitor.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -548,7 +626,7 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name in ["geok-italian-national-monitor.csv", "geok-italian-national-monitor.md", "matched-opportunities.json"]:
         shutil.copy2(run_dir / name, OUT_DIR / name)
-    print(f"Matched {len(rows)} ASI/CNR/Aeronautica records.")
+    print(f"Matched {len(rows)} ASI/CNR/Aeronautica/ARPA records.")
     print(f"Archived run: {run_dir}")
     print(OUT_DIR / "geok-italian-national-monitor.md")
     return 0
