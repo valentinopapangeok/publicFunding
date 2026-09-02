@@ -10,6 +10,24 @@
       "geo_k_use": "ESA Earth Action, BASS-adjacent ESA tenders, EO applications, wildfire, water, AI, drones, critical infrastructure, archaeology/cultural heritage"
     },
     {
+      "id": "esa-osip",
+      "name": "ESA Open Space Innovation Platform",
+      "provider": "European Space Agency",
+      "status": "implemented",
+      "public_url": "https://ideas.esa.int/",
+      "data_access": "public OSIP campaign and channel pages; submissions require OSIP account and campaign-specific eligibility checks",
+      "geo_k_use": "standalone R&D and science ideas, Discovery studies, early technology development, co-sponsored research, autonomy, Earth observation, sustainability, PNT and open idea campaigns"
+    },
+    {
+      "id": "esa-gstp-element-2",
+      "name": "GSTP Element 2 Make",
+      "provider": "European Space Agency",
+      "status": "implemented",
+      "public_url": "https://ideas.esa.int/",
+      "data_access": "public OSIP channel page; full tender documentation is referenced through ESA-star/EMITS AO9834 and may require registration",
+      "geo_k_use": "industry-driven co-funded R&D/product development for space technology and applications; useful for Geo-K productisation routes where national delegation support is feasible"
+    },
+    {
       "id": "ec-funding-tenders",
       "name": "EU Funding & Tenders Portal",
       "provider": "European Commission",

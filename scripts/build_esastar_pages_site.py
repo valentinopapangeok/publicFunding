@@ -14,6 +14,7 @@ SITE = ROOT / "site" / "esa-star-monitor"
 
 SOURCE_CSVS = [
     ("ESA-star", ROOT / "funding-scout" / "monitoring" / "esa-star" / "latest" / "geok-opportunity-monitor.csv"),
+    ("ESA Open Calls", ROOT / "funding-scout" / "monitoring" / "esa-open-calls" / "latest" / "geok-esa-open-calls-monitor.csv"),
     ("EU Funding & Tenders", ROOT / "funding-scout" / "monitoring" / "eu-funding-tenders" / "latest" / "geok-eu-ft-monitor.csv"),
     ("ECMWF Copernicus", ROOT / "funding-scout" / "monitoring" / "ecmwf-copernicus" / "latest" / "geok-ecmwf-monitor.csv"),
     ("LIFE CINEA", ROOT / "funding-scout" / "monitoring" / "life-cinea" / "latest" / "geok-life-monitor.csv"),
@@ -101,6 +102,10 @@ def classify_call(row: dict[str, str]) -> str:
 
     if "business applications" in text or " bass " in f" {text} ":
         return "Business/application call - expect customer, user, or business case evidence"
+    if "esa gstp" in source or "gstp element 2" in text:
+        return "ESA GSTP Element 2 - industry-driven co-funded R&D/product route; national support likely required"
+    if "esa osip" in source or "open space innovation" in text or "osip" in text:
+        return "ESA OSIP open call - standalone idea, R&D or science route; verify campaign/channel rules"
     if "esa-star" in source:
         if row.get("Status", "").lower() == "intended":
             return "ESA tender pipeline - prepare early, watch for ITT package"
@@ -156,6 +161,10 @@ def partner_bucket(row: dict[str, str]) -> str:
     source = row.get("Source", "").lower()
     text = " ".join([burden, lens, source, row.get("Type", "").lower(), row.get("Programme", "").lower()])
 
+    if "esa osip" in source:
+        return "No partner needed"
+    if "esa gstp" in source:
+        return "Partner needed"
     if "high -" in burden or "consortium likely" in text or "horizon ria/ia" in text or "strategic project" in text:
         return "Consortium needed"
     if "erasmus" in source:

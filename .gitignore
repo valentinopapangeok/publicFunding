@@ -9,6 +9,7 @@
 
 !scripts/
 !scripts/esastar_monitor.py
+!scripts/esa_open_calls_monitor.py
 !scripts/eu_ft_monitor.py
 !scripts/ecmwf_monitor.py
 !scripts/life_cinea_monitor.py

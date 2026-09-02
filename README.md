@@ -1,10 +1,10 @@
 # Geo-K Funding Monitor
 
-Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor covers ESA-star, EU Funding & Tenders, Erasmus+, ECMWF Copernicus procurement, LIFE/CINEA, FAO/UNGM, ASI, CNR, Aeronautica Militare, ARPA regional environmental-agency tenders, ISPRA, MIMIT/Invitalia incentives, and PID/Camere di Commercio vouchers.
+Public, sanitized monitor for active funding opportunities relevant to Geo-K. The implemented monitor covers ESA-star, ESA OSIP, GSTP Element 2, EU Funding & Tenders, Erasmus+, ECMWF Copernicus procurement, LIFE/CINEA, FAO/UNGM, ASI, CNR, Aeronautica Militare, ARPA regional environmental-agency tenders, ISPRA, MIMIT/Invitalia incentives, and PID/Camere di Commercio vouchers.
 
 The monitor queries public source data, filters active opportunities, assigns deadline urgency, and publishes a static GitHub Pages report. It also keeps "check source" rows for relevant Italian public pages where the official HTML does not expose a machine-readable deadline.
 
-The published table includes a `Call Lens` column: a plain-language hint describing whether the row is a supplier tender, EU/Horizon-style consortium grant, LIFE project, UN procurement notice, ESA tender pipeline item, or business/application call where customer, user, or business-case evidence is likely needed.
+The published table includes a `Call Lens` column: a plain-language hint describing whether the row is a supplier tender, EU/Horizon-style consortium grant, LIFE project, UN procurement notice, ESA tender pipeline item, OSIP standalone idea route, GSTP co-funded product/R&D route, or business/application call where customer, user, or business-case evidence is likely needed.
 
 Geo-K themes are separated from source portals:
 
@@ -12,7 +12,7 @@ Geo-K themes are separated from source portals:
 - Geo-K profile: `monitoring/geok-profile.md`
 - Implementation roadmap: `monitoring/roadmap.md`
 - ESA-star keyword profile: `monitoring/esa-star/geok-keywords.json`
-- Source scripts: `scripts/esastar_monitor.py`, `scripts/eu_ft_monitor.py`, `scripts/ecmwf_monitor.py`, `scripts/life_cinea_monitor.py`, `scripts/fao_ungm_monitor.py`, `scripts/italian_sources_monitor.py`
+- Source scripts: `scripts/esastar_monitor.py`, `scripts/esa_open_calls_monitor.py`, `scripts/eu_ft_monitor.py`, `scripts/ecmwf_monitor.py`, `scripts/life_cinea_monitor.py`, `scripts/fao_ungm_monitor.py`, `scripts/italian_sources_monitor.py`
 
 Current Geo-K themes include Earth Observation, satellite image processing, wildfire, water/hydrology, air quality, methane columns, surface temperature, BRDF, agriculture, drones/UAVs, autonomous systems, edge/on-board AI, SAR/SWIR/thermal, validation/veracity/provenance, archaeology/cultural heritage, critical infrastructure monitoring, and learning/skills opportunities.
 
@@ -28,6 +28,7 @@ site/esa-star-monitor/
 
 ```sh
 python3 scripts/esastar_monitor.py 300
+python3 scripts/esa_open_calls_monitor.py
 python3 scripts/eu_ft_monitor.py 25
 python3 scripts/ecmwf_monitor.py
 python3 scripts/life_cinea_monitor.py
@@ -40,6 +41,7 @@ Generated local outputs:
 
 ```text
 funding-scout/monitoring/esa-star/latest/
+funding-scout/monitoring/esa-open-calls/latest/
 funding-scout/monitoring/eu-funding-tenders/latest/
 funding-scout/monitoring/ecmwf-copernicus/latest/
 funding-scout/monitoring/life-cinea/latest/

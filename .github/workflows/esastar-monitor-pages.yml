@@ -29,6 +29,9 @@ jobs:
       - name: Run ESA-star monitor
         run: python3 scripts/esastar_monitor.py 300
 
+      - name: Run ESA open calls monitor
+        run: python3 scripts/esa_open_calls_monitor.py
+
       - name: Run EU Funding & Tenders monitor
         run: python3 scripts/eu_ft_monitor.py 25
 
