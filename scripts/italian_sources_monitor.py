@@ -50,6 +50,7 @@ SOURCE_SEARCHES = {
         ],
         "seed_urls": [
             "https://www.asi.it/bandi_e_concorsi/procedura-negoziata-per-laffidamento-dei-servizi-di-ricerca-e-sviluppo-relativi-a-iniziative-a-supporto-della-space-economy-e-nello-specifico-delliniziativa-space-and-blue/",
+            "https://www.asi.it/bandi_e_concorsi/terza-call-i4dp_science-sviluppo-di-applicativi-basati-su-nuovi-metodi-e-algoritmi-di-analisi-di-dati-satellitari-e-formazione-di-personale-a-qualificazione-medio-alta-in-diversi-settori-applicativ/",
         ],
         "search_urls": ["https://www.asi.it/?s={term}"],
         "keep_link": r"asi\.it/(bandi_e_concorsi|20\d{2}/)",
@@ -455,7 +456,7 @@ def parse_date(value: str) -> datetime | None:
     for match in re.finditer(
         r"\b(\d{1,2})\s+("
         + "|".join(MONTHS)
-        + r")\s+(20\d{2})(?:\s+(?:alle|ore)\s+(\d{1,2})[:.](\d{2}))?",
+        + r")\s+(20\d{2})(?:[,\s]+(?:alle|ore)\s+(\d{1,2})[:.](\d{2}))?",
         value_l,
     ):
         day, month_name, year, hour, minute = match.groups()
