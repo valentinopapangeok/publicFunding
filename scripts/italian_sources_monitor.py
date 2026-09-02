@@ -31,9 +31,17 @@ SOURCE_SEARCHES = {
             "IRIDE",
             "Space Economy",
             "Space and Blue",
+            "I4DP",
+            "I4DP_SCIENCE",
+            "Innovation for Downstream Preparation",
+            "call for ideas",
             "osservazione terra",
             "servizi geospaziali",
             "telerilevamento",
+            "dati satellitari",
+            "agricoltura",
+            "risorse idriche",
+            "uso sostenibile delle risorse idriche",
         ],
         "base_urls": [
             "https://www.asi.it/bandi/",
@@ -231,6 +239,10 @@ EXTRA_TERMS = {
     "space economy": 3,
     "iride": 4,
     "space and blue": 4,
+    "i4dp": 4,
+    "i4dp_science": 5,
+    "innovation for downstream preparation": 5,
+    "call for ideas": 3,
     "lidar": 4,
     "aerofotogrammetria": 5,
     "uav": 4,
@@ -263,6 +275,10 @@ EXTRA_TERMS = {
     "bidirectional reflectance": 4,
     "riflettanza bidirezionale": 4,
     "acque": 3,
+    "risorse idriche": 4,
+    "uso sostenibile delle risorse idriche": 5,
+    "agricoltura": 3,
+    "downstream scientifico": 4,
     "ecoidraulica": 4,
     "morfodinamica fluviale": 4,
     "soluzioni tecnologiche": 3,
@@ -394,6 +410,7 @@ def context_for_link(page_html: str, href: str, title: str) -> str:
 
 def page_title(page_html: str, fallback: str) -> str:
     for pattern in (
+        r'<meta\s+property=["\']og:title["\']\s+content=["\'](.*?)["\']',
         r"<h1[^>]*>(.*?)</h1>",
         r"<h2[^>]*>\s*OGGETTO\s*</h2>\s*<h2[^>]*>(.*?)</h2>",
         r"<title[^>]*>(.*?)</title>",
@@ -527,6 +544,15 @@ def canonical_url(value: str) -> str:
 def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], score: int) -> bool:
     title_l = candidate.title.lower()
     if source == "ASI":
+        context_l = candidate.context.lower()
+        deadline = deadline_for(candidate.context)
+        if deadline and deadline.date() < datetime.now().date():
+            return False
+        if "revocat" in context_l or "graduatoria" in context_l or "scorrimento" in context_l:
+            return False
+        year_match = re.search(r"asi\.it/(20\d{2})/", candidate.url)
+        if year_match and year_match.group(1) != str(datetime.now().year):
+            return False
         opportunity_words = (
             "bando",
             "bandi",
@@ -621,6 +647,23 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
     return True
 
 
+def enrich_candidate(source: str, candidate: LinkCandidate) -> LinkCandidate:
+    if source != "ASI" or "asi.it/bandi_e_concorsi/" not in candidate.url:
+        return candidate
+    try:
+        body = fetch_html(candidate.url)
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        return candidate
+    return LinkCandidate(
+        source=candidate.source,
+        provider=candidate.provider,
+        programme=candidate.programme,
+        title=page_title(body, candidate.title),
+        url=candidate.url,
+        context=clean(body)[:5000],
+    )
+
+
 def scan_source(source: str, meta: dict[str, Any], cfg: dict[str, Any], run_dir: Path) -> list[dict[str, str]]:
     urls: list[str] = []
     seed_urls = set(meta.get("seed_urls", []))
@@ -681,13 +724,14 @@ def scan_source(source: str, meta: dict[str, Any], cfg: dict[str, Any], run_dir:
 
     now = datetime.now()
     rows: list[dict[str, str]] = []
-    for candidate in candidates.values():
-        score, terms = score_text(candidate.title, cfg)
+    for raw_candidate in candidates.values():
+        candidate = enrich_candidate(source, raw_candidate)
+        combined = f"{candidate.title} {candidate.context}"
+        score, terms = score_text(combined, cfg)
         if score < 2:
             continue
         if not source_relevant(source, candidate, terms, score):
             continue
-        combined = f"{candidate.title} {candidate.context}"
         deadline = deadline_for(candidate.context)
         urgency, days = urgency_for(deadline, now)
         if urgency.startswith("GRAY"):
