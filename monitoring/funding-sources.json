@@ -19,6 +19,15 @@
       "geo_k_use": "Horizon Europe, Digital Europe, LIFE topics, security, space, environment, cultural heritage, civil protection, critical infrastructure"
     },
     {
+      "id": "erasmus-plus",
+      "name": "Erasmus+ Funding Opportunities",
+      "provider": "European Commission / EACEA",
+      "status": "implemented",
+      "public_url": "https://erasmus-plus.ec.europa.eu/funding-calls",
+      "data_access": "public Erasmus+ pages and EU Funding & Tenders / SEDIA topic records",
+      "geo_k_use": "learning, training, capacity building, digital and green skills, vocational excellence, Copernicus/EO education and partner development"
+    },
+    {
       "id": "life-cinea",
       "name": "LIFE Calls for Proposals",
       "provider": "CINEA / European Commission",
@@ -80,6 +89,33 @@
       "public_url": "https://bandi.arpa.piemonte.it/",
       "data_access": "public ARPA and ARPAE tender pages; individual procedures may route through MePA, SINTEL, BDNCP or an agency procurement portal",
       "geo_k_use": "environmental monitoring, hydrology, air and water quality, flood and wildfire risk, LiDAR, drones, geospatial data and public-agency procurement signals"
+    },
+    {
+      "id": "ispra",
+      "name": "ISPRA Tenders and Environmental Research Opportunities",
+      "provider": "Istituto Superiore per la Protezione e la Ricerca Ambientale",
+      "status": "implemented",
+      "public_url": "https://www.isprambiente.gov.it/files2026/trasparenza/bandi-di-gara-2026",
+      "data_access": "public ISPRA transparency, tender and research-call pages",
+      "geo_k_use": "environmental monitoring, water, biodiversity, air quality, EO/geospatial research, technical procurements and public-sector partner intelligence"
+    },
+    {
+      "id": "mimit-invitalia",
+      "name": "MIMIT / Invitalia Incentives",
+      "provider": "Ministero delle Imprese e del Made in Italy / Invitalia",
+      "status": "implemented",
+      "public_url": "https://www.mimit.gov.it/it/incentivi",
+      "data_access": "public incentive pages; applications normally use dedicated MIMIT, Invitalia or Fondo Crescita Sostenibile portals",
+      "geo_k_use": "SME incentives, R&D, Space Economy, sustainable investments, green/digital transition and skills funding"
+    },
+    {
+      "id": "pid-camere-commercio",
+      "name": "PID / Camere di Commercio Vouchers",
+      "provider": "Unioncamere / Camere di Commercio",
+      "status": "implemented",
+      "public_url": "https://www.puntoimpresadigitale.camcom.it/voucher",
+      "data_access": "public PID and chamber voucher pages; applications often use ReStart/InfoCamere or local chamber portals",
+      "geo_k_use": "digital and green transition vouchers, AI/cloud/cybersecurity/IoT adoption, training and smaller local SME grants"
     }
   ]
 }

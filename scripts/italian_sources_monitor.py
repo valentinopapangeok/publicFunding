@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monitor Italian ASI, CNR, Aeronautica and ARPA public opportunity pages."""
+"""Monitor Italian ASI, CNR, Aeronautica, ARPA, ISPRA, MIMIT and PID pages."""
 
 from __future__ import annotations
 
@@ -125,6 +125,100 @@ SOURCE_SEARCHES = {
         ],
         "keep_link": r"(bandi\.arpa\.piemonte\.it/(bandi-appalti|avvisi)/|arpae\.it/it/bandi-gara/20\d{2}/|arpalombardia\.it/amministrazione-trasparente/bandi-di-gara-e-contratti/)",
     },
+    "ISPRA": {
+        "provider": "Istituto Superiore per la Protezione e la Ricerca Ambientale",
+        "programme": "ISPRA procurements, research calls and environmental opportunities",
+        "terms": [
+            "telerilevamento",
+            "dati satellitari",
+            "geospaziale",
+            "Copernicus",
+            "qualita aria",
+            "qualita acqua",
+            "metano",
+            "colonne di metano",
+            "temperatura superficiale",
+            "temperatura del suolo",
+            "BRDF",
+            "drone",
+            "UAV",
+            "monitoraggio ambientale",
+            "idrogeologico",
+            "acque",
+            "ecoidraulica",
+            "morfodinamica fluviale",
+            "biodiversita",
+        ],
+        "base_urls": [
+            "https://www.isprambiente.gov.it/files2026/trasparenza/bandi-di-gara-2026",
+            "https://www.isprambiente.gov.it/it/amministrazione-trasparente/bandi-di-gara-e-contratti",
+        ],
+        "seed_urls": [],
+        "search_urls": [
+            "https://www.isprambiente.gov.it/it/@@search?SearchableText={term}",
+        ],
+        "keep_link": r"isprambiente\.gov\.it/.*(bandi|gara|avvisi|trasparenza|dottorato|ricerca|soluzioni-tecnologiche|files2026)",
+    },
+    "MIMIT / Invitalia": {
+        "provider": "Ministero delle Imprese e del Made in Italy / Invitalia",
+        "programme": "Italian SME incentives, R&D and green/digital transition calls",
+        "terms": [
+            "Space Economy",
+            "Scoperta imprenditoriale",
+            "Investimenti sostenibili",
+            "transizione digitale",
+            "transizione verde",
+            "intelligenza artificiale",
+            "cloud",
+            "cybersecurity",
+            "competenze",
+            "formazione",
+            "sostenibilita",
+            "tecnologie avanzate",
+        ],
+        "base_urls": [
+            "https://www.mimit.gov.it/it/incentivi",
+            "https://www.mimit.gov.it/it/incentivi/scoperta-imprenditoriale-2026",
+            "https://www.invitalia.it/incentivi-e-strumenti/investimenti-sostenibili-40-bando-2026",
+        ],
+        "seed_urls": [
+            "https://www.mimit.gov.it/it/notizie-stampa/al-via-scoperta-imprenditoriale-ii-505-milioni-in-ricerca-e-sviluppo-nelle-regioni-del-mezzogiorno",
+            "https://www.invitalia.it/incentivi-e-strumenti/investimenti-sostenibili-40-bando-2026",
+        ],
+        "search_urls": [
+            "https://www.mimit.gov.it/it/ricerca?searchword={term}",
+            "https://www.invitalia.it/ricerca?search={term}",
+        ],
+        "keep_link": r"(mimit\.gov\.it/it/(incentivi|notizie-stampa)/|invitalia\.it/incentivi-e-strumenti/)",
+    },
+    "PID / Camere di Commercio": {
+        "provider": "Unioncamere / Camere di Commercio",
+        "programme": "PID digital and green transition vouchers",
+        "terms": [
+            "doppia transizione",
+            "transizione digitale",
+            "transizione green",
+            "intelligenza artificiale",
+            "cloud",
+            "cyber security",
+            "cybersecurity",
+            "IoT",
+            "formazione",
+            "competenze",
+            "sostenibilita",
+        ],
+        "base_urls": [
+            "https://www.puntoimpresadigitale.camcom.it/voucher",
+            "https://www.puntoimpresadigitale.camcom.it/voucher/bando-doppia-transizione-anno-2026-0",
+        ],
+        "seed_urls": [
+            "https://www.puntoimpresadigitale.camcom.it/voucher/bando-doppia-transizione-anno-2026-0",
+        ],
+        "search_urls": [
+            "https://www.puntoimpresadigitale.camcom.it/ricerca?search_api_fulltext={term}",
+        ],
+        "keep_link": r"puntoimpresadigitale\.camcom\.it/(voucher|.*bando)",
+    },
 }
 
 EXTRA_TERMS = {
@@ -157,6 +251,30 @@ EXTRA_TERMS = {
     "qualita acqua": 2,
     "qualità acqua": 2,
     "hpc": 2,
+    "qualita aria": 3,
+    "qualità aria": 3,
+    "qualita acqua": 3,
+    "qualità acqua": 3,
+    "metano": 4,
+    "colonne di metano": 5,
+    "temperatura superficiale": 4,
+    "temperatura del suolo": 4,
+    "brdf": 4,
+    "bidirectional reflectance": 4,
+    "riflettanza bidirezionale": 4,
+    "acque": 3,
+    "ecoidraulica": 4,
+    "morfodinamica fluviale": 4,
+    "soluzioni tecnologiche": 3,
+    "transizione digitale": 3,
+    "transizione verde": 3,
+    "doppia transizione": 4,
+    "competenze": 2,
+    "formazione": 2,
+    "sostenibilita": 2,
+    "sostenibilità": 2,
+    "scoperta imprenditoriale": 4,
+    "investimenti sostenibili": 4,
     "imaging": 2,
     "acquisizione": 1,
     "manifestazione di interesse": 2,
@@ -361,6 +479,8 @@ def urgency_for(deadline: datetime | None, now: datetime) -> tuple[str, str]:
 
 
 def type_for(source: str, text: str) -> str:
+    if source in {"MIMIT / Invitalia", "PID / Camere di Commercio"}:
+        return "Grant / incentive"
     text_l = text.lower()
     if "manifestazione di interesse" in text_l:
         return "Expression of interest"
@@ -368,10 +488,14 @@ def type_for(source: str, text: str) -> str:
         return "Procurement"
     if "borsa" in text_l or "contratto di ricerca" in text_l or "selezione" in text_l:
         return "Research/recruitment call"
+    if "incentiv" in text_l or "agevolazion" in text_l or "contribut" in text_l or "voucher" in text_l:
+        return "Grant / incentive"
     if source == "Aeronautica Militare":
         return "Procurement"
     if source == "ARPA":
         return "Environmental procurement / notice"
+    if source == "ISPRA":
+        return "Environmental procurement / research notice"
     return "Call / notice"
 
 
@@ -380,6 +504,12 @@ def consortium_note(source: str, kind: str) -> str:
         return "LOW/MEDIUM - supplier procurement; verify tender documents and registration route"
     if source == "ARPA":
         return "LOW/MEDIUM - regional public procurement; verify agency portal, MePA/SINTEL/BDNCP route and tender-specific eligibility"
+    if source == "ISPRA":
+        return "LOW/MEDIUM - national environmental public source; verify tender, research-call or supplier route"
+    if source == "MIMIT / Invitalia":
+        return "LOW/MEDIUM - SME incentive route; verify geography, expenditure, company size and portal deadlines"
+    if source == "PID / Camere di Commercio":
+        return "LOW - voucher/training route; verify local chamber eligibility and click-day rules"
     if source == "CNR" and kind == "Research/recruitment call":
         return "LOW as funding route - mainly partner/project intelligence unless procurement is present"
     if source == "ASI":
@@ -456,6 +586,38 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
         ):
             return False
         return score >= 3
+    if source == "ISPRA":
+        strong_terms = {
+            "telerilevamento",
+            "dati satellitari",
+            "geospaziale",
+            "copernicus",
+            "qualita aria",
+            "qualità aria",
+            "qualita acqua",
+            "qualità acqua",
+            "metano",
+            "colonne di metano",
+            "temperatura superficiale",
+            "temperatura del suolo",
+            "brdf",
+            "drone",
+            "uav",
+            "monitoraggio ambientale",
+            "idrogeologico",
+            "acque",
+            "ecoidraulica",
+            "morfodinamica fluviale",
+            "soluzioni tecnologiche",
+            "biodiversita",
+            "biodiversità",
+        }
+        current_signal = "files2026" in candidate.url or "2026" in candidate.title or "2026" in candidate.context
+        return current_signal and score >= 3 and any(term.lower() in strong_terms for term in terms)
+    if source == "MIMIT / Invitalia":
+        return any(word in title_l for word in ("incentiv", "scoperta imprenditoriale", "investimenti sostenibili", "agevolazion", "bando"))
+    if source == "PID / Camere di Commercio":
+        return any(word in title_l for word in ("bando", "voucher", "doppia transizione", "pid"))
     return True
 
 
@@ -595,7 +757,7 @@ def write_outputs(rows: list[dict[str, str]], out_dir: Path, now: datetime) -> N
         "",
         f"Generated: {now.strftime('%Y-%m-%d %H:%M')}",
         "",
-        "Scope: ASI, CNR, Aeronautica Militare and ARPA public pages matching Geo-K EO/geospatial/UAV/environmental terms. Rows without machine-readable deadlines are retained as check-source items.",
+        "Scope: ASI, CNR, Aeronautica Militare, ARPA, ISPRA, MIMIT/Invitalia and PID public pages matching Geo-K EO/geospatial/UAV/environmental/learning terms. Rows without machine-readable deadlines are retained as check-source items.",
         "",
     ]
     if rows:
@@ -607,7 +769,7 @@ def write_outputs(rows: list[dict[str, str]], out_dir: Path, now: datetime) -> N
                 f"{row['Deadline']} | {row['Matched Terms']} | [source]({row['URL']}) |"
             )
     else:
-        lines.append("No active or check-source ASI/CNR/Aeronautica/ARPA items matched the Geo-K profile.")
+        lines.append("No active or check-source Italian-source items matched the Geo-K profile.")
     (out_dir / "geok-italian-national-monitor.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -626,7 +788,7 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name in ["geok-italian-national-monitor.csv", "geok-italian-national-monitor.md", "matched-opportunities.json"]:
         shutil.copy2(run_dir / name, OUT_DIR / name)
-    print(f"Matched {len(rows)} ASI/CNR/Aeronautica/ARPA records.")
+    print(f"Matched {len(rows)} Italian-source records.")
     print(f"Archived run: {run_dir}")
     print(OUT_DIR / "geok-italian-national-monitor.md")
     return 0

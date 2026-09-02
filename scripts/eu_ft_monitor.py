@@ -50,6 +50,21 @@ SEARCH_TERMS = [
     "LIFE-2026-STRAT-NAT-SNAP-two-stage",
     "critical infrastructure",
     "civil security disaster",
+    "air quality",
+    "atmospheric composition",
+    "methane columns",
+    "surface temperature",
+    "land surface temperature",
+    "sea surface temperature",
+    "BRDF",
+    "bidirectional reflectance",
+    "Erasmus+ digital skills",
+    "Erasmus+ green skills",
+    "Erasmus+ earth observation",
+    "Erasmus+ Copernicus",
+    "Erasmus+ vocational excellence",
+    "Centres of Vocational Excellence",
+    "ERASMUS-EDU-2026-PEX-COVE",
 ]
 
 PINNED_TOPIC_IDS = {
@@ -217,6 +232,8 @@ def passes_relevance(item: dict[str, Any], cfg: dict[str, Any], score: int, term
     meta = item.get("metadata") or {}
     if is_pinned_topic(item):
         return True
+    if is_erasmus_topic(item):
+        return passes_erasmus_relevance(item, score, terms)
     if score < int(cfg.get("minimum_score", 2)):
         return False
     text = text_blob(item)
@@ -230,6 +247,17 @@ def passes_relevance(item: dict[str, Any], cfg: dict[str, Any], score: int, term
         "drone",
         "uav",
         "wildfire",
+        "air quality",
+        "atmospheric composition",
+        "methane",
+        "methane column",
+        "methane columns",
+        "ch4",
+        "surface temperature",
+        "land surface temperature",
+        "sea surface temperature",
+        "brdf",
+        "bidirectional reflectance",
         "water",
         "hydrology",
         "hydrological",
@@ -267,6 +295,44 @@ def passes_relevance(item: dict[str, Any], cfg: dict[str, Any], score: int, term
         "cultural heritage",
     }
     return not set(terms).issubset(generic_only)
+
+
+def is_erasmus_topic(item: dict[str, Any]) -> bool:
+    meta = item.get("metadata") or {}
+    identifier = first(meta, "identifier").upper()
+    programme = " ".join(
+        first(meta, key) for key in ("frameworkProgramme", "programme", "callTitle", "callIdentifier")
+    ).lower()
+    return identifier.startswith("ERASMUS-") or "erasmus" in programme
+
+
+def passes_erasmus_relevance(item: dict[str, Any], score: int, terms: list[str]) -> bool:
+    if score < 2:
+        return False
+    text = text_blob(item).lower()
+    action = first(item.get("metadata") or {}, "typesOfAction").lower()
+    if "prize" in action or "award" in text or "sport" in action:
+        return False
+    keep_terms = (
+        "digital",
+        "skills",
+        "training",
+        "capacity building",
+        "vocational",
+        "excellence",
+        "green",
+        "climate",
+        "environment",
+        "earth observation",
+        "copernicus",
+        "geospatial",
+        "remote sensing",
+        "space",
+        "ai",
+        "artificial intelligence",
+        "data",
+    )
+    return any(term in text for term in keep_terms)
 
 
 def deadline_for(item: dict[str, Any]) -> datetime | None:
@@ -320,6 +386,11 @@ def urgency_for(deadline: datetime | None, now: datetime) -> tuple[str, int | No
 def consortium_burden(item: dict[str, Any]) -> str:
     meta = item.get("metadata") or {}
     identifier = first(meta, "identifier")
+    if is_erasmus_topic(item):
+        text = text_blob(item).lower()
+        if "partnership" in text or "alliance" in text or "consortium" in text:
+            return "HIGH - Erasmus+ education/skills partnership; consortium or education partner likely"
+        return "MEDIUM - Erasmus+ learning/skills route; verify applicant type and partner rules"
     if identifier == "LIFE-2026-STRAT-NAT-SNAP-two-stage":
         return "HIGH - LIFE Strategic Nature Project; public authority / large partnership route likely"
     text = text_blob(item).lower()
@@ -346,6 +417,24 @@ def normalized_url(item: dict[str, Any]) -> str:
     return item.get("url") or ""
 
 
+def source_label(item: dict[str, Any]) -> str:
+    if is_erasmus_topic(item):
+        return "Erasmus+"
+    return "EU Funding & Tenders"
+
+
+def provider_label(item: dict[str, Any]) -> str:
+    if is_erasmus_topic(item):
+        return "European Commission / EACEA"
+    return "European Commission"
+
+
+def geography_label(item: dict[str, Any]) -> str:
+    if is_erasmus_topic(item):
+        return "Erasmus+ eligible countries and applicant-type rules; verify topic-specific partner requirements"
+    return "EU/associated country rules; verify topic-specific restrictions"
+
+
 def write_outputs(matches: list[Match], now: datetime, out_dir: Path) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     rows = []
@@ -356,8 +445,8 @@ def write_outputs(matches: list[Match], now: datetime, out_dir: Path) -> None:
         identifier = first(meta, "identifier")
         rows.append(
             {
-                "Source": "EU Funding & Tenders",
-                "Provider": "European Commission",
+                "Source": source_label(item),
+                "Provider": provider_label(item),
                 "Programme": first(meta, "callTitle") or first(meta, "frameworkProgramme"),
                 "Call ID": first(meta, "callIdentifier"),
                 "Topic ID": identifier,
@@ -367,7 +456,7 @@ def write_outputs(matches: list[Match], now: datetime, out_dir: Path) -> None:
                 "Opened": opening_for(item),
                 "Deadline": "" if not deadline else deadline.isoformat(),
                 "Clarification": "",
-                "Geography / Eligibility": "EU/associated country rules; verify topic-specific restrictions",
+                "Geography / Eligibility": geography_label(item),
                 "Consortium Burden": match.consortium_burden,
                 "Urgency": match.urgency,
                 "Days": "" if match.days_to_deadline is None else str(match.days_to_deadline),

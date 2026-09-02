@@ -107,12 +107,20 @@ def classify_call(row: dict[str, str]) -> str:
         return "ESA tender - supplier bid; partner/user need depends on ITT"
     if "ecmwf" in source:
         return "Procurement tender - supplier or subcontractor bid, not a grant"
+    if "erasmus" in source:
+        return "Erasmus+ learning/skills call - education or training partner route likely"
     if "ungm" in source or "fao" in source:
         return "UN procurement - supplier tender; registration and tender documents required"
     if "aeronautica" in text:
         return "Italian defence procurement - supplier route; inspect tender documents and registration requirements"
     if "arpa" in source or "regional environmental" in text:
         return "Italian environmental agency procurement - supplier route; inspect agency portal and MePA/SINTEL/BDNCP requirements"
+    if "ispra" in source or "istituto superiore per la protezione" in text:
+        return "Italian national environmental source - procurement, research-call or partner-intelligence route"
+    if "mimit" in source or "invitalia" in source:
+        return "Italian SME incentive - verify geography, expenditure and company eligibility"
+    if "pid" in source or "camere di commercio" in source:
+        return "Italian voucher/training route - verify local chamber eligibility and click-day rules"
     if "agenzia spaziale italiana" in text or "asi national" in text:
         return "Italian national space opportunity - verify ASI/procurement portal eligibility"
     if "consiglio nazionale delle ricerche" in text or "cnr" in source:
@@ -150,6 +158,8 @@ def partner_bucket(row: dict[str, str]) -> str:
 
     if "high -" in burden or "consortium likely" in text or "horizon ria/ia" in text or "strategic project" in text:
         return "Consortium needed"
+    if "erasmus" in source:
+        return "Partner needed"
     if "business/application" in lens or "customer" in lens or "partner/user" in text or "public authority partner" in text:
         return "Partner needed"
     if "life grant" in lens or "eu grant" in lens or "technical assistance" in text:
