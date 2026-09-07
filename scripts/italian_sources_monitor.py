@@ -544,6 +544,7 @@ def canonical_url(value: str) -> str:
 
 def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], score: int) -> bool:
     title_l = candidate.title.lower()
+    combined_l = f"{candidate.title} {candidate.context}".lower()
     if source == "ASI":
         context_l = candidate.context.lower()
         deadline = deadline_for(candidate.context)
@@ -553,6 +554,8 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
             return False
         year_match = re.search(r"asi\.it/(20\d{2})/", candidate.url)
         if year_match and year_match.group(1) != str(datetime.now().year):
+            return False
+        if "investimenti sostenibili" in combined_l and "asi.it/20" in candidate.url:
             return False
         opportunity_words = (
             "bando",
@@ -567,24 +570,37 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
         )
         return "bandi_e_concorsi" in candidate.url or any(word in title_l for word in opportunity_words)
     if source == "Aeronautica Militare":
-        strong_terms = {
-            "uav",
-            "lidar",
-            "aerofotogrammetria",
-            "satcom",
-            "mq-9",
-            "mq-9a",
-            "space situational awareness",
-            "ssa",
-        }
-        if any(term in strong_terms for term in terms):
-            return True
-        return "manifestazione di interesse" in title_l
+        return False
     if source == "CNR":
         return score >= 4
     if source == "ARPA":
         current_year = str(datetime.now().year)
         if "arpae.it/it/bandi-gara/" in candidate.url and f"/{current_year}/" not in candidate.url:
+            return False
+        hard_exclude_markers = (
+            "/allegati",
+            ".p7m",
+            "chiarimenti",
+            "risposte ai chiarimenti",
+            "esiti di gara",
+            "aggiudicato",
+        )
+        if any(marker in combined_l for marker in hard_exclude_markers):
+            return False
+        hardware_procurement_markers = (
+            "fornitura",
+            "installazione",
+            "manutenzione",
+            "apparecchiature",
+            "strumento",
+            "strumentazione",
+            "sistemi di calcolo",
+            "classe server",
+            "data center",
+            "storage",
+            "in house",
+        )
+        if any(marker in title_l for marker in hardware_procurement_markers):
             return False
         strong_terms = {
             "telerilevamento",
@@ -602,7 +618,6 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
             "qualità aria",
             "qualita acqua",
             "qualità acqua",
-            "hpc",
         }
         if not any(term.lower() in strong_terms for term in terms):
             return False
@@ -614,6 +629,15 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
             return False
         return score >= 3
     if source == "ISPRA":
+        non_opportunity_markers = (
+            "modello_domanda",
+            "modello domanda",
+            "all._",
+            ".odt",
+            "dottorato",
+        )
+        if title_l == "2026" or any(marker in combined_l for marker in non_opportunity_markers):
+            return False
         strong_terms = {
             "telerilevamento",
             "dati satellitari",
@@ -642,6 +666,17 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
         current_signal = "files2026" in candidate.url or "2026" in candidate.title or "2026" in candidate.context
         return current_signal and score >= 3 and any(term.lower() in strong_terms for term in terms)
     if source == "MIMIT / Invitalia":
+        manufacturing_incentive_markers = (
+            "investimenti sostenibili",
+            "beni strumentali",
+            "macchinari",
+            "impianti",
+            "attrezzature",
+            "unita produttiva",
+            "unità produttiva",
+        )
+        if any(marker in combined_l for marker in manufacturing_incentive_markers):
+            return False
         return any(word in title_l for word in ("incentiv", "scoperta imprenditoriale", "investimenti sostenibili", "agevolazion", "bando"))
     if source == "PID / Camere di Commercio":
         return any(word in title_l for word in ("bando", "voucher", "doppia transizione", "pid"))
