@@ -383,6 +383,27 @@ def urgency_for(deadline: datetime | None, now: datetime) -> tuple[str, int | No
     return "GREEN - due >30 days", days
 
 
+def has_historical_topic_year_mismatch(item: dict[str, Any], deadline: datetime | None, now: datetime) -> bool:
+    """Reject stale Horizon topic pages that the SEDIA API attaches to newer call metadata."""
+    meta = item.get("metadata") or {}
+    identifier = first(meta, "identifier").upper()
+    match = re.search(r"(?:HORIZON|LIFE|ERASMUS)-[A-Z0-9]+-(20\d{2})-", identifier)
+    if not match:
+        return False
+    topic_year = int(match.group(1))
+    if topic_year >= now.year - 1:
+        return False
+    dated_years = []
+    if deadline:
+        dated_years.append(deadline.year)
+    opened = parse_dt(first(meta, "startDate") or first(meta, "es_SortDate"))
+    if opened:
+        dated_years.append(opened.year)
+    if not dated_years:
+        return False
+    return max(dated_years) >= now.year
+
+
 def consortium_burden(item: dict[str, Any]) -> str:
     meta = item.get("metadata") or {}
     identifier = first(meta, "identifier")
@@ -513,6 +534,8 @@ def main() -> int:
     for item in seen.values():
         deadline = deadline_for(item)
         if deadline and deadline.date() < now.date():
+            continue
+        if has_historical_topic_year_mismatch(item, deadline, now):
             continue
         score, terms = score_item(item, cfg)
         if is_pinned_topic(item) and not terms:
