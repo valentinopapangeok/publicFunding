@@ -32,6 +32,9 @@ jobs:
       - name: Run ESA open calls monitor
         run: python3 scripts/esa_open_calls_monitor.py
 
+      - name: Run ESA Business Applications monitor
+        run: python3 scripts/esa_business_monitor.py
+
       - name: Run EU Funding & Tenders monitor
         run: python3 scripts/eu_ft_monitor.py 25
 
@@ -46,6 +49,9 @@ jobs:
 
       - name: Run Italian national sources monitor
         run: python3 scripts/italian_sources_monitor.py
+
+      - name: Analyse funding timing patterns
+        run: python3 scripts/analyze_funding_timing.py
 
       - name: Build static site
         run: python3 scripts/build_esastar_pages_site.py

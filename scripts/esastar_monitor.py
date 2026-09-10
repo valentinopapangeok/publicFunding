@@ -171,6 +171,17 @@ def text_blob(tender: dict[str, Any]) -> str:
     return f"{tender.get('title') or ''} {tender.get('description') or ''}".lower()
 
 
+def is_ignored_tender(tender: dict[str, Any], cfg: dict[str, Any]) -> bool:
+    ignored = {str(item).strip().lower() for item in cfg.get("ignored_tender_numbers", [])}
+    if not ignored:
+        return False
+    identifiers = {
+        str(tender.get("tanumber") or "").strip().lower(),
+        str(tender.get("id") or "").strip().lower(),
+    }
+    return bool(ignored & identifiers)
+
+
 def eligibility_scope(tender: dict[str, Any]) -> tuple[bool, str]:
     text = text_blob(tender)
     countries = tender.get("countries") or []
@@ -404,7 +415,7 @@ def write_report(matches: list[Match], now: datetime, out_dir: Path) -> None:
 
 def main() -> int:
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
-    max_items = int(sys.argv[1]) if len(sys.argv) > 1 else 300
+    max_items = int(sys.argv[1]) if len(sys.argv) > 1 else 1000
     now = datetime.now()
     run_dir = RUNS_DIR / now.strftime("%Y%m%d-%H%M%S")
     tenders = get_all_tenders(max_items)
@@ -413,6 +424,8 @@ def main() -> int:
 
     matches: list[Match] = []
     for tender in tenders:
+        if is_ignored_tender(tender, cfg):
+            continue
         if not is_active_tender(tender, now):
             continue
         score, terms = score_tender(tender, cfg)

@@ -15,6 +15,7 @@ SITE = ROOT / "site" / "esa-star-monitor"
 SOURCE_CSVS = [
     ("ESA-star", ROOT / "funding-scout" / "monitoring" / "esa-star" / "latest" / "geok-opportunity-monitor.csv"),
     ("ESA Open Calls", ROOT / "funding-scout" / "monitoring" / "esa-open-calls" / "latest" / "geok-esa-open-calls-monitor.csv"),
+    ("ESA Business Applications", ROOT / "funding-scout" / "monitoring" / "esa-business" / "latest" / "geok-esa-business-monitor.csv"),
     ("EU Funding & Tenders", ROOT / "funding-scout" / "monitoring" / "eu-funding-tenders" / "latest" / "geok-eu-ft-monitor.csv"),
     ("ECMWF Copernicus", ROOT / "funding-scout" / "monitoring" / "ecmwf-copernicus" / "latest" / "geok-ecmwf-monitor.csv"),
     ("LIFE CINEA", ROOT / "funding-scout" / "monitoring" / "life-cinea" / "latest" / "geok-life-monitor.csv"),

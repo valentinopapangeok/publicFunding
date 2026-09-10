@@ -28,6 +28,15 @@
       "geo_k_use": "industry-driven co-funded R&D/product development for space technology and applications; useful for Geo-K productisation routes where national delegation support is feasible"
     },
     {
+      "id": "esa-business-applications",
+      "name": "ESA Business Applications and Space Solutions",
+      "provider": "European Space Agency",
+      "status": "implemented",
+      "public_url": "https://business.esa.int/OpenCfPlist",
+      "data_access": "public BASS open calls and thematic call pages; APQ submission uses ESA Business Applications routes and may require esa-star registration and National Delegation authorisation",
+      "geo_k_use": "downstream space-enabled services, customer/user-driven feasibility studies, demonstration projects, pilot projects, agriculture, water, wildfire, infrastructure, maritime, logistics and environmental monitoring"
+    },
+    {
       "id": "ec-funding-tenders",
       "name": "EU Funding & Tenders Portal",
       "provider": "European Commission",
