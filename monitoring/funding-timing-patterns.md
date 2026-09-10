@@ -1,6 +1,6 @@
 # Funding Timing Patterns
 
-Generated: 2026-09-10 17:04
+Generated: 2026-09-10 17:35
 
 This report uses the current monitor outputs. It is good enough to spot operating patterns, but it is not a complete multi-year procurement history unless the source exposes historic calls in its current feed.
 

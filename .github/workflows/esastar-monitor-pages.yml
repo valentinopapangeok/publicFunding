@@ -26,6 +26,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Restore published history
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch --depth=1 origin gh-pages
+            git show FETCH_HEAD:history.csv > monitoring/funding-history.csv || true
+          fi
+
       - name: Run ESA-star monitor
         run: python3 scripts/esastar_monitor.py 300
 
@@ -49,6 +57,9 @@ jobs:
 
       - name: Run Italian national sources monitor
         run: python3 scripts/italian_sources_monitor.py
+
+      - name: Update funding history
+        run: python3 scripts/update_funding_history.py
 
       - name: Analyse funding timing patterns
         run: python3 scripts/analyze_funding_timing.py

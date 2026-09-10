@@ -17,12 +17,15 @@
 !scripts/fao_ungm_monitor.py
 !scripts/italian_sources_monitor.py
 !scripts/analyze_funding_timing.py
+!scripts/update_funding_history.py
 !scripts/build_esastar_pages_site.py
 
 !monitoring/
 !monitoring/funding-sources.json
 !monitoring/funding-procedure-logbook.md
 !monitoring/funding-timing-patterns.md
+!monitoring/funding-history.csv
+!monitoring/funding-history-patterns.md
 !monitoring/geok-profile.md
 !monitoring/roadmap.md
 !monitoring/targeted-scouts/
@@ -37,3 +40,6 @@
 !site/esa-star-monitor/.nojekyll
 !site/esa-star-monitor/index.html
 !site/esa-star-monitor/data.json
+!site/esa-star-monitor/history.csv
+!site/esa-star-monitor/history.json
+!site/esa-star-monitor/funding-history-patterns.md

@@ -471,6 +471,7 @@ def main() -> int:
   <header>
     <h1>Geo-K Funding Monitor</h1>
     <p>Active-only opportunities filtered for Geo-K's profile: satellite image processing, EO pipelines, onboard/edge AI, drones and image campaigns, wildfire, water and hydrology, agriculture, archaeology and cultural heritage, critical infrastructure, and broad European or Italian relevance. Generated {html.escape(generated)}.</p>
+    <p><a href="history.csv">History CSV</a> · <a href="history.json">History JSON</a> · <a href="funding-history-patterns.md">History patterns</a></p>
     <div class="legend">
       <span class="badge" style="background:{COLORS['RED']}">RED <=7 days</span>
       <span class="badge" style="background:{COLORS['ORANGE']}">ORANGE <=21 days</span>
