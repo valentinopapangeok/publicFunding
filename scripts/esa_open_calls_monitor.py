@@ -141,12 +141,21 @@ def score_text(text: str, cfg: dict[str, Any]) -> tuple[int, list[str]]:
 
 
 def parse_exact_date(text: str) -> datetime | None:
+    def build_datetime(year: str, month: str, day: str, hour: str | None, minute: str | None) -> datetime:
+        hour_i = int(hour) if hour else 23
+        minute_i = int(minute) if minute else 59
+        if hour_i == 24 and minute_i == 0:
+            return datetime(int(year), int(month), int(day)) + timedelta(days=1)
+        if not (0 <= hour_i <= 23 and 0 <= minute_i <= 59):
+            return datetime(int(year), int(month), int(day), 23, 59)
+        return datetime(int(year), int(month), int(day), hour_i, minute_i)
+
     for match in re.finditer(r"\b(\d{1,2})/(\d{1,2})/(20\d{2})(?:,\s*Time\s*)?(?:\(?(\d{1,2}):(\d{2})\)?)?", text):
         day, month, year, hour, minute = match.groups()
-        return datetime(int(year), int(month), int(day), int(hour or 23), int(minute or 59))
+        return build_datetime(year, month, day, hour, minute)
     for match in re.finditer(r"\b(20\d{2})-(\d{2})-(\d{2})(?:[ T](\d{1,2}):(\d{2}))?", text):
         year, month, day, hour, minute = match.groups()
-        return datetime(int(year), int(month), int(day), int(hour or 23), int(minute or 59))
+        return build_datetime(year, month, day, hour, minute)
     return None
 
 
