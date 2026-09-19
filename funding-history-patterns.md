@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-09-18 10:38
+Generated: 2026-09-19 10:24
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
@@ -11,10 +11,10 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | ASI | 2 | 2 | 0 |  |  |  | Sep (1), Oct (1) | Sep (2) | needs more history |
 | ECMWF Copernicus | 4 | 4 | 4 | 76d | 61-91d | Jul (3), Jun (1) | Sep (3), Oct (1) | Sep (4) | medium-window |
 | ESA Business Applications | 3 | 3 | 0 |  |  | Dec (1), Mar (1) |  | Sep (3) | rolling/no fixed deadline |
-| ESA GSTP | 25 | 4 | 0 |  |  |  | Nov (16) | Sep (25) | needs more history |
-| ESA OSIP | 96 | 12 | 0 |  |  |  | Sep (24), Nov (8), Jan (8) | Sep (96) | needs more history |
-| ESA-star | 32 | 31 | 20 | 60d | 14-126d | Jul (10), Sep (8), May (2) | Oct (10), Sep (9), Nov (1) | Sep (32) | medium-window |
-| EU Funding & Tenders | 26 | 23 | 26 | 156d | 134-231d | Apr (11), May (8), Feb (4), Mar (2), Sep (1) | Sep (19), Nov (5), Dec (1), Jan (1) | Sep (26) | long-window |
+| ESA GSTP | 25 | 0 | 0 |  |  |  | Nov (16) | Sep (25) | needs more history |
+| ESA OSIP | 97 | 1 | 0 |  |  |  | Sep (24), Nov (8), Jan (8) | Sep (97) | needs more history |
+| ESA-star | 32 | 30 | 21 | 58d | 14-126d | Jul (10), Sep (9), May (2) | Oct (10), Sep (9), Nov (2) | Sep (32) | medium-window |
+| EU Funding & Tenders | 26 | 24 | 26 | 156d | 134-231d | Apr (11), May (8), Feb (4), Mar (2), Sep (1) | Sep (19), Nov (5), Dec (1), Jan (1) | Sep (26) | long-window |
 | LIFE/CINEA | 9 | 9 | 9 | 154d | 154-317d | Apr (9) | Sep (8), Mar (1) | Sep (9) | long-window |
 | MIMIT / Invitalia | 2 | 2 | 0 |  |  |  |  | Sep (2) | rolling/no fixed deadline |
 | PID / Camere di Commercio | 4 | 4 | 0 |  |  |  |  | Sep (4) | rolling/no fixed deadline |
@@ -28,7 +28,7 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | ESA Business Applications | 0 | 0 | 0 | 0 |
 | ESA GSTP | 0 | 0 | 0 | 0 |
 | ESA OSIP | 0 | 0 | 0 | 0 |
-| ESA-star | 6 | 10 | 4 | 0 |
+| ESA-star | 7 | 10 | 4 | 0 |
 | EU Funding & Tenders | 0 | 0 | 14 | 12 |
 | LIFE/CINEA | 0 | 0 | 8 | 1 |
 | MIMIT / Invitalia | 0 | 0 | 0 | 0 |
