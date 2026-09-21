@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-09-20 10:42
+Generated: 2026-09-21 12:04
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
@@ -8,7 +8,7 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 
 | Source | Calls | Current | Date pairs | Median open window | Window range | Opening months | Deadline months | First-seen months | Typical pattern |
 | --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- |
-| ASI | 2 | 2 | 0 |  |  |  | Sep (1), Oct (1) | Sep (2) | needs more history |
+| ASI | 2 | 1 | 0 |  |  |  | Sep (1), Oct (1) | Sep (2) | needs more history |
 | ECMWF Copernicus | 4 | 4 | 4 | 76d | 61-91d | Jul (3), Jun (1) | Sep (3), Oct (1) | Sep (4) | medium-window |
 | ESA Business Applications | 3 | 3 | 0 |  |  | Dec (1), Mar (1) |  | Sep (3) | rolling/no fixed deadline |
 | ESA GSTP | 25 | 0 | 0 |  |  |  | Nov (16) | Sep (25) | needs more history |
