@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-09-23 10:51
+Generated: 2026-09-24 11:11
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
@@ -13,8 +13,8 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | ESA Business Applications | 3 | 3 | 0 |  |  | Dec (1), Mar (1) |  | Sep (3) | rolling/no fixed deadline |
 | ESA GSTP | 25 | 0 | 0 |  |  |  | Nov (16) | Sep (25) | needs more history |
 | ESA OSIP | 97 | 1 | 0 |  |  |  | Sep (24), Nov (8), Jan (8) | Sep (97) | needs more history |
-| ESA-star | 32 | 29 | 21 | 58d | 14-126d | Jul (10), Sep (9), May (2) | Oct (10), Sep (9), Nov (2) | Sep (32) | medium-window |
-| EU Funding & Tenders | 26 | 22 | 26 | 156d | 134-231d | Apr (11), May (8), Feb (4), Mar (2), Sep (1) | Sep (19), Nov (5), Dec (1), Jan (1) | Sep (26) | long-window |
+| ESA-star | 32 | 29 | 22 | 58d | 14-126d | Jul (10), Sep (10), May (2) | Oct (10), Sep (9), Nov (3) | Sep (32) | medium-window |
+| EU Funding & Tenders | 26 | 9 | 26 | 156d | 134-231d | Apr (11), May (8), Feb (4), Mar (2), Sep (1) | Sep (19), Nov (5), Dec (1), Jan (1) | Sep (26) | long-window |
 | LIFE/CINEA | 9 | 1 | 9 | 154d | 154-317d | Apr (9) | Sep (8), Mar (1) | Sep (9) | long-window |
 | MIMIT / Invitalia | 2 | 2 | 0 |  |  |  |  | Sep (2) | rolling/no fixed deadline |
 | PID / Camere di Commercio | 4 | 4 | 0 |  |  |  |  | Sep (4) | rolling/no fixed deadline |
@@ -28,7 +28,7 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | ESA Business Applications | 0 | 0 | 0 | 0 |
 | ESA GSTP | 0 | 0 | 0 | 0 |
 | ESA OSIP | 0 | 0 | 0 | 0 |
-| ESA-star | 7 | 10 | 4 | 0 |
+| ESA-star | 8 | 10 | 4 | 0 |
 | EU Funding & Tenders | 0 | 0 | 14 | 12 |
 | LIFE/CINEA | 0 | 0 | 8 | 1 |
 | MIMIT / Invitalia | 0 | 0 | 0 | 0 |
