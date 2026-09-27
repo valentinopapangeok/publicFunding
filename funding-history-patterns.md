@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-09-26 10:53
+Generated: 2026-09-27 11:29
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
