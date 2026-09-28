@@ -108,7 +108,15 @@
     "qgis",
     "jupytergis",
     "vocational education",
-    "learning"
+    "learning",
+    "business applications",
+    "bass",
+    "proof of concept",
+    "challenge owner",
+    "challenge owners",
+    "space-enabled service",
+    "space-enabled services",
+    "commercialisation"
   ],
   "exclude_keywords": [
     "launch vehicle",
@@ -267,7 +275,15 @@
     "training",
     "capacity building",
     "vocational education",
-    "learning"
+    "learning",
+    "business applications",
+    "bass",
+    "proof of concept",
+    "challenge owner",
+    "challenge owners",
+    "space-enabled service",
+    "space-enabled services",
+    "commercialisation"
   ],
   "ignored_tender_numbers": [
     "1-13467",
@@ -353,6 +369,14 @@
     "qgis": 3,
     "jupytergis": 3,
     "vocational education": 2,
-    "learning": 1
+    "learning": 1,
+    "business applications": 4,
+    "bass": 4,
+    "proof of concept": 3,
+    "challenge owner": 3,
+    "challenge owners": 3,
+    "space-enabled service": 4,
+    "space-enabled services": 4,
+    "commercialisation": 2
   }
 }

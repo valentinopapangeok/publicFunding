@@ -127,6 +127,8 @@ def classify_call(row: dict[str, str]) -> str:
         return "Italian SME incentive - verify geography, expenditure and company eligibility"
     if "pid" in source or "camere di commercio" in source:
         return "Italian voucher/training route - verify local chamber eligibility and click-day rules"
+    if "local innovation contest" in source or "innovation contest / prize" in text:
+        return "Italian local innovation contest - direct application; verify prize, submission form and pitch requirements"
     if "agenzia spaziale italiana" in text or "asi national" in text:
         return "Italian national space opportunity - verify ASI/procurement portal eligibility"
     if "consiglio nazionale delle ricerche" in text or "cnr" in source:

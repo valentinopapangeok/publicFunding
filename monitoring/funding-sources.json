@@ -143,6 +143,15 @@
       "public_url": "https://www.puntoimpresadigitale.camcom.it/voucher",
       "data_access": "public PID and chamber voucher pages; applications often use ReStart/InfoCamere or local chamber portals",
       "geo_k_use": "digital and green transition vouchers, AI/cloud/cybersecurity/IoT adoption, training and smaller local SME grants"
+    },
+    {
+      "id": "local-innovation-contests",
+      "name": "Italian Local Innovation Contests",
+      "provider": "Italian municipalities and innovation districts",
+      "status": "implemented",
+      "public_url": "https://www.genovabluedistrict.com/",
+      "data_access": "public municipal and innovation-district contest pages; applications may require local forms, supporting documents and an in-person pitch",
+      "geo_k_use": "water, climate, environment, EO/geospatial, drone and applied-innovation challenge prizes with direct company eligibility"
     }
   ]
 }

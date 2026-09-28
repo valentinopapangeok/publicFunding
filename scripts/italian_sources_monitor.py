@@ -228,6 +228,32 @@ SOURCE_SEARCHES = {
         ],
         "keep_link": r"puntoimpresadigitale\.camcom\.it/(voucher|.*bando)",
     },
+    "Local innovation contests": {
+        "provider": "Italian municipalities and innovation districts",
+        "programme": "Local innovation contests and challenge prizes",
+        "terms": [
+            "acqua",
+            "clima",
+            "ambiente",
+            "osservazione terra",
+            "dati satellitari",
+            "telerilevamento",
+            "geospaziale",
+            "droni",
+            "innovazione",
+        ],
+        "base_urls": [
+            "https://www.genovabluedistrict.com/",
+            "https://www.genovabluedistrict.com/h2o-contest-acqua/",
+        ],
+        "seed_urls": [
+            "https://www.genovabluedistrict.com/h2o-contest-acqua/",
+        ],
+        "search_urls": [
+            "https://www.genovabluedistrict.com/?s={term}",
+        ],
+        "keep_link": r"genovabluedistrict\.com/(?:[^/]+-)?(?:contest|avviso)[^/]*/?",
+    },
 }
 
 EXTRA_TERMS = {
@@ -297,6 +323,13 @@ EXTRA_TERMS = {
     "manifestazione di interesse": 2,
     "procedura negoziata": 2,
     "fornitura": 1,
+    "acqua": 3,
+    "contest": 2,
+    "premio": 2,
+    "innovazione": 2,
+    "resilienza climatica": 4,
+    "creare acqua dall'aria": 5,
+    "umidità dell'aria": 5,
 }
 
 MONTHS = {
@@ -456,7 +489,7 @@ def parse_date(value: str) -> datetime | None:
     for match in re.finditer(
         r"\b(\d{1,2})\s+("
         + "|".join(MONTHS)
-        + r")\s+(20\d{2})(?:[,\s]+(?:alle|ore)\s+(\d{1,2})[:.](\d{2}))?",
+        + r")\s+(20\d{2})(?:[,\s]+(?:alle|ore)\s+(\d{1,2})[:.,](\d{2}))?",
         value_l,
     ):
         day, month_name, year, hour, minute = match.groups()
@@ -472,6 +505,8 @@ def deadline_for(context: str) -> datetime | None:
     deadline_patterns = [
         r"(?:scadenza|data di scadenza|deadline|expiration)[^.;|]{0,180}",
         r"entro\s+il[^.;|]{0,120}",
+        r"(?:candidature|domande)[^.;|]{0,100}fino\s+al[^.;|]{0,120}",
+        r"aperte?[^.;|]{0,80}fino\s+al[^.;|]{0,120}",
     ]
     for pattern in deadline_patterns:
         for match in re.finditer(pattern, context, flags=re.I):
@@ -497,6 +532,8 @@ def urgency_for(deadline: datetime | None, now: datetime) -> tuple[str, str]:
 
 
 def type_for(source: str, text: str) -> str:
+    if source == "Local innovation contests":
+        return "Innovation contest / prize"
     if source in {"MIMIT / Invitalia", "PID / Camere di Commercio"}:
         return "Grant / incentive"
     text_l = text.lower()
@@ -518,6 +555,8 @@ def type_for(source: str, text: str) -> str:
 
 
 def consortium_note(source: str, kind: str) -> str:
+    if source == "Local innovation contests":
+        return "LOW - direct contest application; verify national eligibility, pitch and attendance requirements"
     if source == "Aeronautica Militare":
         return "LOW/MEDIUM - supplier procurement; verify tender documents and registration route"
     if source == "ARPA":
@@ -680,6 +719,24 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
         return any(word in title_l for word in ("incentiv", "scoperta imprenditoriale", "investimenti sostenibili", "agevolazion", "bando"))
     if source == "PID / Camere di Commercio":
         return any(word in title_l for word in ("bando", "voucher", "doppia transizione", "pid"))
+    if source == "Local innovation contests":
+        deadline = deadline_for(candidate.context)
+        if deadline and deadline.date() < datetime.now().date():
+            return False
+        opportunity_words = ("contest", "avviso", "premio", "candidatur", "challenge")
+        application_markers = (
+            "candidature",
+            "domanda di partecipazione",
+            "avviso per la partecipazione",
+            "modalità di partecipazione",
+            "modalita di partecipazione",
+            "form di iscrizione",
+        )
+        return (
+            score >= 2
+            and any(word in combined_l for word in opportunity_words)
+            and (deadline is not None or any(marker in combined_l for marker in application_markers))
+        )
     return True
 
 
@@ -837,7 +894,7 @@ def write_outputs(rows: list[dict[str, str]], out_dir: Path, now: datetime) -> N
         "",
         f"Generated: {now.strftime('%Y-%m-%d %H:%M')}",
         "",
-        "Scope: ASI, CNR, Aeronautica Militare, ARPA, ISPRA, MIMIT/Invitalia and PID public pages matching Geo-K EO/geospatial/UAV/environmental/learning terms. Rows without machine-readable deadlines are retained as check-source items.",
+        "Scope: ASI, CNR, Aeronautica Militare, ARPA, ISPRA, MIMIT/Invitalia, PID and selected local innovation-contest pages matching Geo-K EO/geospatial/UAV/environmental/learning terms. Rows without machine-readable deadlines are retained as check-source items.",
         "",
     ]
     if rows:
