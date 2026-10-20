@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-10-19 12:14
+Generated: 2026-10-20 11:00
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
@@ -12,14 +12,14 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | ASI | 4 | 3 | 0 |  |  |  | Oct (2), Sep (1), Nov (1) | Sep (2), Oct (2) | needs more history |
 | ECMWF Copernicus | 6 | 1 | 6 | 65d | 42-91d | Jul (3), Sep (2), Jun (1) | Sep (3), Nov (2), Oct (1) | Sep (6) | medium-window |
 | ESA Business Applications | 3 | 3 | 0 |  |  | Dec (1), Mar (1) |  | Sep (3) | rolling/no fixed deadline |
-| ESA GSTP | 40 | 0 | 0 |  |  |  | Nov (22), Oct (4) | Sep (31), Oct (9) | needs more history |
-| ESA OSIP | 151 | 1 | 0 |  |  |  | Sep (29), Jan (13), Nov (10), Oct (7), Dec (3) | Sep (121), Oct (30) | needs more history |
-| ESA-star | 47 | 37 | 34 | 56d | 14-962d | Sep (14), Jul (10), May (3), Oct (3), Dec (2) | Oct (12), Sep (10), Nov (9), Dec (3) | Sep (37), Oct (10) | medium-window |
-| EU Funding & Tenders | 32 | 13 | 32 | 153d | 93-231d | Apr (11), May (8), Oct (5), Feb (4), Mar (2) | Sep (19), Nov (5), Jan (5), Oct (1), Dec (1) | Sep (27), Oct (5) | long-window |
+| ESA GSTP | 43 | 4 | 0 |  |  |  | Nov (24), Oct (4) | Sep (31), Oct (12) | needs more history |
+| ESA OSIP | 161 | 10 | 0 |  |  |  | Sep (29), Jan (14), Nov (13), Oct (7), Dec (3) | Sep (121), Oct (40) | needs more history |
+| ESA-star | 47 | 36 | 34 | 56d | 14-962d | Sep (14), Jul (10), May (3), Oct (3), Dec (2) | Oct (12), Sep (10), Nov (9), Dec (3) | Sep (37), Oct (10) | medium-window |
+| EU Funding & Tenders | 33 | 14 | 33 | 153d | 93-231d | Apr (11), May (8), Oct (6), Feb (4), Mar (2) | Sep (19), Nov (5), Jan (5), Feb (2), Oct (1) | Sep (27), Oct (6) | long-window |
 | LIFE/CINEA | 9 | 1 | 9 | 154d | 154-317d | Apr (9) | Sep (8), Mar (1) | Sep (9) | long-window |
 | Local innovation contests | 1 | 0 | 0 |  |  |  | Sep (1) | Sep (1) | needs more history |
 | MIMIT / Invitalia | 2 | 0 | 0 |  |  |  |  | Sep (2) | rolling/no fixed deadline |
-| PID / Camere di Commercio | 8 | 5 | 0 |  |  |  |  | Sep (5), Oct (3) | rolling/no fixed deadline |
+| PID / Camere di Commercio | 9 | 5 | 0 |  |  |  |  | Sep (5), Oct (4) | rolling/no fixed deadline |
 
 ## Window Buckets
 
@@ -32,7 +32,7 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | ESA GSTP | 0 | 0 | 0 | 0 |
 | ESA OSIP | 0 | 0 | 0 | 0 |
 | ESA-star | 14 | 11 | 4 | 5 |
-| EU Funding & Tenders | 0 | 0 | 20 | 12 |
+| EU Funding & Tenders | 0 | 0 | 21 | 12 |
 | LIFE/CINEA | 0 | 0 | 8 | 1 |
 | Local innovation contests | 0 | 0 | 0 | 0 |
 | MIMIT / Invitalia | 0 | 0 | 0 | 0 |
