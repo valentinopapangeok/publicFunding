@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-10-25 10:51
+Generated: 2026-10-26 12:21
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
@@ -19,7 +19,7 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | LIFE/CINEA | 9 | 1 | 9 | 154d | 154-317d | Apr (9) | Sep (8), Mar (1) | Sep (9) | long-window |
 | Local innovation contests | 1 | 0 | 0 |  |  |  | Sep (1) | Sep (1) | needs more history |
 | MIMIT / Invitalia | 2 | 0 | 0 |  |  |  |  | Sep (2) | rolling/no fixed deadline |
-| PID / Camere di Commercio | 9 | 5 | 0 |  |  |  |  | Sep (5), Oct (4) | rolling/no fixed deadline |
+| PID / Camere di Commercio | 10 | 5 | 0 |  |  |  |  | Sep (5), Oct (5) | rolling/no fixed deadline |
 
 ## Window Buckets
 
