@@ -289,6 +289,9 @@
     "1-13467",
     "1-13525"
   ],
+  "tracked_tender_ids": [
+    "180601"
+  ],
   "minimum_score": 2,
   "priority_terms": {
     "wildfire": 3,

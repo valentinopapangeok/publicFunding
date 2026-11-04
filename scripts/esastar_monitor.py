@@ -307,6 +307,19 @@ def get_all_tenders(max_items: int) -> list[dict[str, Any]]:
     return tenders
 
 
+def add_tracked_tenders(tenders: list[dict[str, Any]], cfg: dict[str, Any]) -> list[dict[str, Any]]:
+    """Keep strategic long-running calls from ageing out of the rolling API window."""
+    by_id = {str(tender.get("id")): tender for tender in tenders}
+    for tender_id in cfg.get("tracked_tender_ids", []):
+        key = str(tender_id).strip()
+        if not key or key in by_id:
+            continue
+        data = fetch_json(f"/api/tenderAction/{key}")
+        for tender in data.get("items", []):
+            by_id[str(tender.get("id"))] = tender
+    return list(by_id.values())
+
+
 def read_previous_matches() -> dict[str, dict[str, Any]]:
     path = OUT_DIR / "matched-tenders.json"
     if not path.exists():
@@ -418,7 +431,7 @@ def main() -> int:
     max_items = int(sys.argv[1]) if len(sys.argv) > 1 else 1000
     now = datetime.now()
     run_dir = RUNS_DIR / now.strftime("%Y%m%d-%H%M%S")
-    tenders = get_all_tenders(max_items)
+    tenders = add_tracked_tenders(get_all_tenders(max_items), cfg)
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "all-tenders.json").write_text(json.dumps(tenders, indent=2), encoding="utf-8")
 
