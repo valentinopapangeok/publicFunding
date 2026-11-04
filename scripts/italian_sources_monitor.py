@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monitor Italian ASI, CNR, Aeronautica, ARPA, ISPRA, MIMIT and PID pages."""
+"""Monitor Italian ASI, CNR, ARPA, ISPRA, MIMIT, Lazio Innova and related pages."""
 
 from __future__ import annotations
 
@@ -228,6 +228,28 @@ SOURCE_SEARCHES = {
         ],
         "keep_link": r"puntoimpresadigitale\.camcom\.it/(voucher|.*bando)",
     },
+    "Lazio Innova": {
+        "provider": "Regione Lazio / Lazio Innova",
+        "programme": "Lazio regional SME finance and incentives",
+        "terms": [
+            "finanziamenti con provvista BEI",
+            "contributo in conto interessi",
+            "PMI",
+            "progetti green",
+            "innovazione",
+            "transizione digitale",
+            "transizione ecologica",
+        ],
+        "base_urls": [
+            "https://www.lazioinnova.it/bandi/",
+            "https://www.lazioinnova.it/bandi/finanziamenti-con-provvista-bei-e-contributo-in-conto-interessi/",
+        ],
+        "seed_urls": [
+            "https://www.lazioinnova.it/bandi/finanziamenti-con-provvista-bei-e-contributo-in-conto-interessi/",
+        ],
+        "search_urls": ["https://www.lazioinnova.it/?s={term}"],
+        "keep_link": r"lazioinnova\.it/bandi/[a-z0-9-]+/?",
+    },
     "Local innovation contests": {
         "provider": "Italian municipalities and innovation districts",
         "programme": "Local innovation contests and challenge prizes",
@@ -330,6 +352,10 @@ EXTRA_TERMS = {
     "resilienza climatica": 4,
     "creare acqua dall'aria": 5,
     "umidità dell'aria": 5,
+    "provvista bei": 5,
+    "contributo in conto interessi": 5,
+    "accesso al credito": 3,
+    "progetti green": 3,
 }
 
 MONTHS = {
@@ -516,6 +542,41 @@ def deadline_for(context: str) -> datetime | None:
     return None
 
 
+def opening_for(context: str) -> datetime | None:
+    for pattern in (
+        r"(?:a partire dal|a partire dalle|apertura)[^.;|]{0,180}",
+        r"(?:domande|richieste)[^.;|]{0,100}(?:dal|dalle)[^.;|]{0,120}",
+    ):
+        for match in re.finditer(pattern, context, flags=re.I):
+            parsed = parse_date(match.group(0))
+            if parsed:
+                return parsed
+    return None
+
+
+def lazio_application_window(context: str) -> tuple[datetime | None, datetime | None]:
+    date_token = r"\d{1,2}\s+(?:" + "|".join(MONTHS) + r")\s+20\d{2}"
+    detailed = re.search(
+        rf"a partire dalle ore\s+(\d{{1,2}})[:.]([0-5]\d)\s+del\s+({date_token}).*?"
+        rf"fino alle ore\s+(\d{{1,2}})[:.]([0-5]\d)\s+del\s+({date_token})",
+        context,
+        flags=re.I,
+    )
+    if detailed:
+        open_hour, open_minute, open_date, close_hour, close_minute, close_date = detailed.groups()
+        opened = parse_date(open_date)
+        deadline = parse_date(close_date)
+        if opened:
+            opened = opened.replace(hour=int(open_hour), minute=int(open_minute))
+        if deadline:
+            deadline = deadline.replace(hour=int(close_hour), minute=int(close_minute))
+        return opened, deadline
+    simple = re.search(rf"\bdal\s+({date_token})\s+al\s+({date_token})", context, flags=re.I)
+    if simple:
+        return parse_date(simple.group(1)), parse_date(simple.group(2))
+    return None, None
+
+
 def urgency_for(deadline: datetime | None, now: datetime) -> tuple[str, str]:
     if not deadline:
         return "BLUE - check source/no deadline", ""
@@ -536,6 +597,8 @@ def type_for(source: str, text: str) -> str:
         return "Innovation contest / prize"
     if source in {"MIMIT / Invitalia", "PID / Camere di Commercio"}:
         return "Grant / incentive"
+    if source == "Lazio Innova":
+        return "SME financing / interest subsidy"
     text_l = text.lower()
     if "manifestazione di interesse" in text_l:
         return "Expression of interest"
@@ -567,6 +630,8 @@ def consortium_note(source: str, kind: str) -> str:
         return "LOW/MEDIUM - SME incentive route; verify geography, expenditure, company size and portal deadlines"
     if source == "PID / Camere di Commercio":
         return "LOW - voucher/training route; verify local chamber eligibility and click-day rules"
+    if source == "Lazio Innova":
+        return "LOW - direct SME finance route; verify Lazio operational-site, bank-loan and eligible-expenditure requirements"
     if source == "CNR" and kind == "Research/recruitment call":
         return "LOW as funding route - mainly partner/project intelligence unless procurement is present"
     if source == "ASI":
@@ -719,6 +784,15 @@ def source_relevant(source: str, candidate: LinkCandidate, terms: list[str], sco
         return any(word in title_l for word in ("incentiv", "scoperta imprenditoriale", "investimenti sostenibili", "agevolazion", "bando"))
     if source == "PID / Camere di Commercio":
         return any(word in title_l for word in ("bando", "voucher", "doppia transizione", "pid"))
+    if source == "Lazio Innova":
+        _, deadline = lazio_application_window(candidate.context)
+        deadline = deadline or deadline_for(candidate.context)
+        if deadline and deadline.date() < datetime.now().date():
+            return False
+        if any(marker in combined_l for marker in ("graduatoria", "esito", "archiviat", "chiuso")):
+            return False
+        opportunity_words = ("finanziament", "contribut", "incentiv", "voucher", "agevolazion", "credito")
+        return score >= 2 and any(word in combined_l for word in opportunity_words)
     if source == "Local innovation contests":
         deadline = deadline_for(candidate.context)
         if deadline and deadline.date() < datetime.now().date():
@@ -826,6 +900,11 @@ def scan_source(source: str, meta: dict[str, Any], cfg: dict[str, Any], run_dir:
         if not source_relevant(source, candidate, terms, score):
             continue
         deadline = deadline_for(candidate.context)
+        opened = opening_for(candidate.context)
+        if source == "Lazio Innova":
+            lazio_opened, lazio_deadline = lazio_application_window(candidate.context)
+            opened = lazio_opened or opened
+            deadline = lazio_deadline or deadline
         urgency, days = urgency_for(deadline, now)
         if urgency.startswith("GRAY"):
             continue
@@ -838,12 +917,16 @@ def scan_source(source: str, meta: dict[str, Any], cfg: dict[str, Any], run_dir:
                 "Call ID": "",
                 "Topic ID": candidate.url.rsplit("/", 2)[-2] if candidate.url.endswith("/") else candidate.url.rsplit("/", 1)[-1],
                 "Title": candidate.title,
-                "Status": "Open/check source" if deadline else "Check source",
+                "Status": "Forthcoming" if opened and opened.date() > now.date() else ("Open/check source" if deadline else "Check source"),
                 "Type": kind,
-                "Opened": "",
+                "Opened": "" if not opened else opened.isoformat(),
                 "Deadline": "" if not deadline else deadline.isoformat(),
                 "Clarification": "",
-                "Geography / Eligibility": "Italy / Italian public source; verify tender-specific eligibility",
+                "Geography / Eligibility": (
+                    "SMEs and Midcaps with an operational site in Lazio; interest subsidy is reserved to SMEs after a BEI-backed loan."
+                    if source == "Lazio Innova"
+                    else "Italy / Italian public source; verify tender-specific eligibility"
+                ),
                 "Consortium Burden": consortium_note(source, kind),
                 "Urgency": urgency,
                 "Days": days,
@@ -894,7 +977,7 @@ def write_outputs(rows: list[dict[str, str]], out_dir: Path, now: datetime) -> N
         "",
         f"Generated: {now.strftime('%Y-%m-%d %H:%M')}",
         "",
-        "Scope: ASI, CNR, Aeronautica Militare, ARPA, ISPRA, MIMIT/Invitalia, PID and selected local innovation-contest pages matching Geo-K EO/geospatial/UAV/environmental/learning terms. Rows without machine-readable deadlines are retained as check-source items.",
+        "Scope: ASI, CNR, Aeronautica Militare, ARPA, ISPRA, MIMIT/Invitalia, Lazio Innova, PID and selected local innovation-contest pages matching Geo-K EO/geospatial/UAV/environmental/learning terms. Rows without machine-readable deadlines are retained as check-source items.",
         "",
     ]
     if rows:

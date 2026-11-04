@@ -16,7 +16,7 @@
       "status": "implemented",
       "public_url": "https://ideas.esa.int/",
       "data_access": "public OSIP campaign and channel pages; submissions require OSIP account and campaign-specific eligibility checks",
-      "geo_k_use": "standalone R&D and science ideas, Discovery studies, early technology development, co-sponsored research, autonomy, Earth observation, sustainability, PNT and open idea campaigns"
+      "geo_k_use": "standalone R&D and science ideas, Discovery studies, early technology development, co-sponsored research, autonomy, Earth observation, sustainability, PNT, S-100 hydrographic/maritime data and open idea campaigns"
     },
     {
       "id": "esa-gstp-element-2",
@@ -143,6 +143,15 @@
       "public_url": "https://www.puntoimpresadigitale.camcom.it/voucher",
       "data_access": "public PID and chamber voucher pages; applications often use ReStart/InfoCamere or local chamber portals",
       "geo_k_use": "digital and green transition vouchers, AI/cloud/cybersecurity/IoT adoption, training and smaller local SME grants"
+    },
+    {
+      "id": "lazio-innova",
+      "name": "Lazio Innova Calls and SME Finance",
+      "provider": "Regione Lazio / Lazio Innova",
+      "status": "implemented",
+      "public_url": "https://www.lazioinnova.it/bandi/",
+      "data_access": "public Lazio Innova call pages; applications use GeCoWEB Plus or the scheme-specific banking/application route",
+      "geo_k_use": "Lazio SME finance, interest subsidies, innovation, green/digital transition and regional investment support"
     },
     {
       "id": "local-innovation-contests",

@@ -26,6 +26,11 @@ GSTP_ELEMENT_2_URL = (
     "documentId=d1b0bbb26bfd9c41bd3d3e4471325c40&"
     "documentTableId=45087596271774066&templateName=&userAction=Browse"
 )
+S100_CAMPAIGN_DOCUMENT_ID = "d8a14d0d9c922290a57c2f70dd50a997"
+S100_CAMPAIGN_URL = (
+    "https://ideas.esa.int/core/servlet/hype/IMT?"
+    f"documentId={S100_CAMPAIGN_DOCUMENT_ID}&templateName=&userAction=Browse"
+)
 
 EXTRA_TERMS = {
     "osip": 3,
@@ -53,6 +58,13 @@ EXTRA_TERMS = {
     "sustainability": 2,
     "lunar data": 2,
     "pnt": 2,
+    "s-100": 5,
+    "hydrographic": 4,
+    "hydrography": 4,
+    "bathymetry": 4,
+    "maritime": 3,
+    "marine": 2,
+    "coastal": 2,
 }
 
 FIELDNAMES = [
@@ -156,6 +168,18 @@ def parse_exact_date(text: str) -> datetime | None:
     for match in re.finditer(r"\b(20\d{2})-(\d{2})-(\d{2})(?:[ T](\d{1,2}):(\d{2}))?", text):
         year, month, day, hour, minute = match.groups()
         return build_datetime(year, month, day, hour, minute)
+    english_months = {
+        "january": 1, "february": 2, "march": 3, "april": 4,
+        "may": 5, "june": 6, "july": 7, "august": 8,
+        "september": 9, "october": 10, "november": 11, "december": 12,
+    }
+    for match in re.finditer(
+        r"\b(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})\b",
+        text,
+        flags=re.I,
+    ):
+        day, month_name, year = match.groups()
+        return datetime(int(year), english_months[month_name.lower()], int(day), 23, 59)
     return None
 
 
@@ -219,6 +243,15 @@ def parse_osip_cards(source_html: str) -> list[Opportunity]:
         table_id = table_match.group(1) if table_match else ""
         cards.append(Opportunity(title=title, kind=kind, url=url, text=text, item_id=item_id, table_id=table_id))
     return cards
+
+
+def stable_osip_url(opp: Opportunity) -> str:
+    if re.fullmatch(r"[a-f0-9]{32}", opp.item_id):
+        return (
+            "https://ideas.esa.int/core/servlet/hype/IMT?"
+            f"documentId={opp.item_id}&templateName=&userAction=Browse"
+        )
+    return opp.url
 
 
 def page_opportunity(url: str, fallback_kind: str) -> Opportunity:
@@ -302,7 +335,7 @@ def row_for(opp: Opportunity, cfg: dict[str, Any], now: datetime) -> dict[str, s
         "Provider": "European Space Agency",
         "Programme": programme,
         "Call ID": opp.item_id,
-        "Topic ID": opp.table_id,
+        "Topic ID": opp.item_id if re.fullmatch(r"[a-f0-9]{32}", opp.item_id) else opp.table_id,
         "Title": opp.title,
         "Status": status_for(opp.text),
         "Type": opp.kind,
@@ -316,7 +349,7 @@ def row_for(opp: Opportunity, cfg: dict[str, Any], now: datetime) -> dict[str, s
         "Score": str(score),
         "Matched Terms": ", ".join(matched),
         "Theme": clean(opp.text)[:900],
-        "URL": opp.url,
+        "URL": stable_osip_url(opp),
     }
 
 
@@ -352,6 +385,8 @@ def main() -> int:
     (run_dir / "osip-start.html").write_text(source_html, encoding="utf-8")
 
     opportunities = parse_osip_cards(source_html)
+    opportunities = [opp for opp in opportunities if opp.item_id != S100_CAMPAIGN_DOCUMENT_ID]
+    opportunities.append(page_opportunity(S100_CAMPAIGN_URL, "OSIP Campaign"))
     opportunities.append(page_opportunity(GSTP_ELEMENT_2_URL, "OSIP Channel"))
 
     rows_by_url: dict[str, dict[str, str]] = {}
