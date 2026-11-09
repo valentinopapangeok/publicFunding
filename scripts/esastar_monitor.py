@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -55,19 +56,38 @@ def fetch_json(path: str, params: dict[str, Any] | None = None) -> Any:
     if params:
         url = f"{url}?{urlencode(params, doseq=True)}"
     req = Request(url, headers={"Accept": "application/json", "User-Agent": "Geo-K funding scout"})
-    try:
-        with urlopen(req, timeout=30) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except (HTTPError, URLError):
-        result = subprocess.run(
-            ["curl", "-Ls", "-H", "Accept: application/json", url],
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            timeout=45,
-        )
-        return json.loads(result.stdout)
+    for attempt in range(3):
+        try:
+            with urlopen(req, timeout=30) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except (HTTPError, URLError, TimeoutError, OSError, json.JSONDecodeError):
+            if attempt < 2:
+                time.sleep(2**attempt)
+
+    result = subprocess.run(
+        [
+            "curl",
+            "-fLsS",
+            "--retry",
+            "4",
+            "--retry-all-errors",
+            "--retry-delay",
+            "2",
+            "--connect-timeout",
+            "15",
+            "--max-time",
+            "60",
+            "-H",
+            "Accept: application/json",
+            url,
+        ],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        timeout=300,
+    )
+    return json.loads(result.stdout)
 
 
 def parse_dt(value: str | None) -> datetime | None:
