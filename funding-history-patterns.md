@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-11-10 14:26
+Generated: 2026-11-11 13:38
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
@@ -20,7 +20,7 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | Lazio Innova | 5 | 4 | 1 | 680d | 680-680d | Nov (1) | Oct (1) | Nov (5) | very long or rolling |
 | Local innovation contests | 1 | 0 | 0 |  |  |  | Sep (1) | Sep (1) | needs more history |
 | MIMIT / Invitalia | 2 | 0 | 0 |  |  |  |  | Sep (2) | rolling/no fixed deadline |
-| PID / Camere di Commercio | 12 | 5 | 0 |  |  |  |  | Sep (5), Oct (5), Nov (2) | rolling/no fixed deadline |
+| PID / Camere di Commercio | 12 | 4 | 0 |  |  |  |  | Sep (5), Oct (5), Nov (2) | rolling/no fixed deadline |
 
 ## Window Buckets
 
