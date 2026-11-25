@@ -1,6 +1,6 @@
 # Funding History Patterns
 
-Generated: 2026-11-24 17:03
+Generated: 2026-11-25 16:53
 
 This report uses the accumulated Geo-K monitor history. Opening/deadline statistics are only computed when a source exposes those dates.
 
@@ -14,7 +14,7 @@ This report uses the accumulated Geo-K monitor history. Opening/deadline statist
 | ESA Business Applications | 3 | 2 | 0 |  |  | Dec (1), Mar (1) |  | Sep (3) | rolling/no fixed deadline |
 | ESA GSTP | 67 | 2 | 0 |  |  |  | Nov (40), Oct (4) | Sep (31), Oct (21), Nov (15) | needs more history |
 | ESA OSIP | 238 | 12 | 0 |  |  |  | Sep (29), Jan (24), Nov (19), Oct (12), Dec (7) | Sep (121), Oct (67), Nov (50) | needs more history |
-| ESA-star | 67 | 40 | 42 | 56d | 14-1510d | Sep (14), Jul (10), Nov (7), Oct (4), May (3) | Oct (12), Sep (10), Nov (9), Dec (8), Jan (3) | Sep (37), Nov (19), Oct (11) | medium-window |
+| ESA-star | 67 | 39 | 42 | 56d | 14-1510d | Sep (14), Jul (10), Nov (7), Oct (4), May (3) | Oct (12), Sep (10), Nov (9), Dec (8), Jan (3) | Sep (37), Nov (19), Oct (11) | medium-window |
 | EU Funding & Tenders | 42 | 17 | 42 | 153d | 60-231d | Apr (11), Oct (9), May (8), Nov (6), Feb (4) | Sep (19), Jan (7), Nov (5), Feb (4), Mar (4) | Sep (27), Oct (9), Nov (6) | long-window |
 | LIFE/CINEA | 9 | 1 | 9 | 154d | 154-317d | Apr (9) | Sep (8), Mar (1) | Sep (9) | long-window |
 | Lazio Innova | 6 | 6 | 1 | 680d | 680-680d | Nov (2) | Oct (1) | Nov (6) | very long or rolling |
